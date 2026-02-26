@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wrench 23 Mobile Mechanic - Professional mobile auto repair in Mesa, Arizona. 5-star rated service. Call (480) 776-4785">
+<title>Wrench 23 Mobile Mechanic | Mesa, Arizona</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --charcoal: #1a1a2e;
+    --charcoal-light: #16213e;
+    --charcoal-mid: #0f3460;
+    --orange: #e94560;
+    --orange-bright: #ff6b35;
+    --orange-dark: #c73652;
+    --silver: #b8c0cc;
+    --silver-light: #dde1e7;
+    --white: #ffffff;
+    --off-white: #f8f9fa;
+    --text-dark: #1a1a2e;
+    --text-gray: #5a6a7a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Work Sans', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Oswald', sans-serif;
+    line-height: 1.2;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  img { max-width: 100%; display: block; }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ===== NAVIGATION ===== */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(26, 26, 46, 0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--orange-bright);
+    padding: 0;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-logo-icon {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, var(--orange-bright), var(--orange));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nav-logo-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+
+  .nav-logo-text span {
+    color: var(--orange-bright);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--silver-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--orange-bright); }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--orange-bright), var(--orange));
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4) !important;
+    color: var(--white) !important;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 5px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--white);
+    transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    background: var(--charcoal);
+    padding: 20px;
+    border-top: 1px solid rgba(255,107,53,0.3);
+  }
+
+  .mobile-menu.open { display: block; }
+
+  .mobile-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mobile-menu a {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    color: var(--silver-light);
+    font-size: 1rem;
+    display: block;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://source.unsplash.com/1920x1080/?mechanic,automotive,repair&sig=wrench23mo1');
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.05);
+    transition: transform 8s ease;
+  }
+
+  .hero:hover .hero-bg { transform: scale(1.0); }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(26, 26, 46, 0.92) 0%,
+      rgba(15, 52, 96, 0.85) 50%,
+      rgba(26, 26, 46, 0.75) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 20px 80px;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 107, 53, 0.15);
+    border: 1px solid rgba(255, 107, 53, 0.4);
+    color: var(--orange-bright);
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    line-height: 1.05;
+  }
+
+  .hero h1 span {
+    color: var(--orange-bright);
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--silver-light);
+    margin-bottom: 16px;
+    font-weight: 300;
+    max-width: 560px;
+  }
+
+  .hero-location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--silver);
+    font-size: 0.95rem;
+    margin-bottom: 36px;
+  }
+
+  .hero-stars {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .stars-row {
+    display: flex;
+    gap: 4px;
+  }
+
+  .hero-stars-text {
+    color: var(--silver-light);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--orange-bright), var(--orange));
+    color: var(--white);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 16px 36px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.35);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+
+  .btn-primary:hover::after { transform: translateX(0); }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(255, 107, 53, 0.5);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--white);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 14px 34px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    border: 2px solid rgba(255,255,255,0.4);
+    transition: all 0.3s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--orange-bright);
+    color: var(--orange-bright);
+    transform: translateY(-3px);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ===== STATS BAR ===== */
+  .stats-bar {
+    background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-mid) 100%);
+    padding: 0;
+    border-bottom: 3px solid var(--orange-bright);
+  }
+
+  .stats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .stat-item {
+    padding: 28px 20px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--orange-bright);
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.82rem;
+    color: var(--silver);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ===== PHONE BAR ===== */
+  .phone-bar {
+    background: linear-gradient(135deg, var(--orange-bright), var(--orange));
+    padding: 16px 20px;
+    text-align: center;
+  }
+
+  .phone-bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .phone-bar-text {
+    color: var(--white);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .phone-bar-number {
+    color: var(--white);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s;
+  }
+
+  .phone-bar-number:hover { transform: scale(1.05); }
+
+  /* ===== SECTION STYLES ===== */
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    color: var(--orange-bright);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+    position: relative;
+    padding: 0 20px;
+  }
+
+  .section-tag::before,
+  .section-tag::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    height: 1px;
+    background: var(--orange-bright);
+  }
+
+  .section-tag::before { right: 100%; transform: translateX(16px); }
+  .section-tag::after { left: 100%; transform: translateX(-16px); }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .section-title.light { color: var(--white); }
+
+  .section-line {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--orange-bright), var(--orange));
+    margin: 0 auto 16px;
+    border-radius: 2px;
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--text-gray);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .section-desc.light { color: var(--silver-light); }
+
+  /* ===== SERVICES ===== */
+  .services {
+    padding: 96px 0;
+    background: var(--off-white);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .service-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    transition: all 0.4s;
+    position: relative;
+    group: true;
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.14);
+  }
+
+  .service-card-img {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .service-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+
+  .service-card:hover .service-card-img img {
+    transform: scale(1.08);
+  }
+
+  .service-card-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(26,26,46,0.6) 100%);
+  }
+
+  .service-card-icon {
+    position: absolute;
+    bottom: -20px;
+    left: 24px;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--orange-bright), var(--orange));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(255,107,53,0.4);
+    z-index: 2;
+  }
+
+  .service-card-body {
+    padding: 36px 24px 24px;
+  }
+
+  .service-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .service-card-desc {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  .service-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--orange-bright);
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: gap 0.3s;
+  }
+
+  .service-card:hover .service-card-link { gap: 12px; }
+
+  /* ===== WHY CHOOSE US ===== */
+  .why-us {
+    padding: 96px 0;
+    background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-mid) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-us::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255,107,53,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .why-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 36px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--orange-bright), var(--orange));
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+
+  .why-card:hover::before { transform: scaleX(1); }
+
+  .why-card:hover {
+    background: rgba(255,255,255,0.07);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  }
+
+  .why-card-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(233,69,96,0.2));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,107,53,0.3);
+  }
+
+  .why-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  .why-card-desc {
+    font-size: 0.9rem;
+    color: var(--silver);
+    line-height: 1.75;
+  }
+
+  /* ===== ABOUT ===== */
+  .about {
+    padding: 96px 0;
+    background: var(--white);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-img-wrap {
+    position: relative;
+  }
+
+  .about-img-main {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+
+  .about-img-accent {
+    position: absolute;
+    bottom: -24px;
+    right: -24px;
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(135deg, var(--orange-bright), var(--orange));
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 40px rgba(255,107,53,0.4);
+    z-index: 2;
+  }
+
+  .about-accent-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .about-accent-text {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 12px;
+  }
+
+  .about-content .section-header {
+    text-align: left;
+    margin-bottom: 24px;
+  }
+
+  .about-content .section-tag::before { display: none; }
+  .about-content .section-tag { padding-left: 0; }
+
+  .about-content .section-line { margin: 0 0 16px; }
+
+  .about-text {
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .about-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 28px 0;
+  }
+
+  .about-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.92rem;
+    color: var(--text-dark);
+    font-weight: 500;
+  }
+
+  .about-list-icon {
+    width: 22px;
+    height: 22px;
+    background: linear-gradient(135deg, var(--orange-bright), var(--orange));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ===== SERVICE AREA ===== */
+  .service-area {
+    padding: 96px 0;
+    background: var(--off-white);
+  }
+
+  .area-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .area-map {
+    background: var(--charcoal);
+    border-radius: 8px;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 16px 50px rgba(0,0,0,0.15);
+  }
+
+  .area-map iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(30%) contrast(1.1);
+  }
+
+  .area-content .section-header {
+    text-align: left;
+    margin-bottom: 28px;
+  }
+
+  .area-content .section-tag::before { display: none; }
+  .area-content .section-tag { padding-left: 0; }
+  .area-content .section-line { margin: 0 0 16px; }
+
+  .area-cities {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .area-city {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    padding: 10px 14px;
+    background: var(--white);
+    border-radius: 6px;
+    border-left: 3px solid var(--orange-bright);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.2s;
+  }
+
+  .area-city:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba(255,107,53,0.15);
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials {
+    padding: 96px 0;
+    background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-mid) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testimonials::after {
+    content: '"';
+    position: absolute;
+    right: -20px;
+    top: 20px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 400px;
+    color: rgba(255,255,255,0.02);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .testimonial-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 36px;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--orange-bright), var(--orange));
+    border-radius: 8px 8px 0 0;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+
+  .testimonial-stars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 18px;
+  }
+
+  .testimonial-text {
+    font-size: 0.92rem;
+    color: var(--silver-light);
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 18px;
+  }
+
+  .author-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--orange-bright), var(--orange));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    display: block;
+  }
+
+  .author-location {
+    font-size: 0.8rem;
+    color: var(--silver);
+  }
+
+  /* ===== CONTACT ===== */
+  .contact {
+    padding: 96px 0;
+    background: var(--white);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .contact-info h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .contact-info p {
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .contact-icon {
+    width: 46px;
+    height: 46px;
+    background: linear-gradient(135deg, rgba(255,107,53,0.12), rgba(233,69,96,0.12));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,107,53,0.25);
+  }
+
+  .contact-item-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--orange-bright);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .contact-item-value {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    font-weight: 500;
+  }
+
+  .contact-item-value a {
+    color: var(--charcoal);
+    transition: color 0.2s;
+  }
+
+  .contact-item-value a:hover { color: var(--orange-bright); }
+
+  .contact-phone-big {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--charcoal), var(--charcoal-mid));
+    color: var(--white);
+    padding: 20px 28px;
+    border-radius: 8px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(26,26,46,0.25);
+  }
+
+  .contact-phone-big:hover {
+    background: linear-gradient(135deg, var(--orange-bright), var(--orange));
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(255,107,53,0.4);
+    color: var(--white);
+  }
+
+  .contact-form {
+    background: var(--off-white);
+    padding: 44px;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .contact-form h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--orange-bright);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid rgba(0,0,0,0.09);
+    border-radius: 6px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.92rem;
+    color: var(--text-dark);
+    background: var(--white);
+    transition: border-color 0.3s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--orange-bright);
+    box-shadow: 0 0 0 3px rgba(255,107,53,0.12);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+  }
+
+  .form-submit {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--orange-bright), var(--orange));
+    color: var(--white);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 6px 20px rgba(255,107,53,0.3);
+  }
+
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(255,107,53,0.45);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--charcoal);
+    padding: 64px 0 0;
+    border-top: 3px solid var(--orange-bright);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+
+  .footer-brand-name span { color: var(--orange-bright); }
+
+  .footer-desc {
+    font-size: 0.88rem;
+    color: var(--silver);
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+
+  .footer-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,107,53,0.12);
+    border: 1px solid rgba(255,107,53,0.3);
+    color: var(--orange-bright);
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+
+  .footer-phone:hover {
+    background: var(--orange-bright);
+    color: var(--white);
+    border-color: var(--orange-bright);
+  }
+
+  .footer-col-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    font-size: 0.88rem;
+    color: var(--silver);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .footer-links a::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 1px;
+    background: var(--orange-bright);
+    transition: width 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: var(--orange-bright);
+    transform: translateX(4px);
+  }
+
+  .footer-links a:hover::before { width: 12px; }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-bottom-text {
+    font-size: 0.82rem;
+    color: var(--silver);
+  }
+
+  .footer-bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--silver);
+  }
+
+  /* ===== FLOATING PHONE ===== */
+  .floating-phone {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .floating-phone-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--orange-bright), var(--orange));
+    color: var(--white);
+    padding: 14px 22px;
+    border-radius: 50px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 30px rgba(255,107,53,0.45);
+    transition: all 0.3s;
+    animation: floatPulse 3s ease-in-out infinite;
+  }
+
+  .floating-phone-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(255,107,53,0.6);
+    color: var(--white);
+  }
+
+  @keyframes floatPulse {
+    0%, 100% { box-shadow: 0 8px 30px rgba(255,107,53,0.45); }
+    50% { box-shadow: 0 8px 40px rgba(255,107,53,0.7), 0 0 0 8px rgba(255,107,53,0.1); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid { gap: 48px; }
+    .contact-grid { gap: 40px; }
+    .area-grid { gap: 40px; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2) { border-right: none; }
+    .stat-item:nth-child(3) { border-bottom: none; }
+
+    .services-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .area-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+
+    .about-img-wrap { max-width: 500px; margin: 0 auto; }
+    .about-img-accent { right: 0; bottom: -16px; width: 130px; height: 130px; }
+    .about-accent-num { font-size: 2.5rem; }
+
+    .hero-buttons { flex-direction: column; align-items: flex-start; }
+
+    .contact-form { padding: 28px 20px; }
+
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .floating-phone-btn span.phone-label { display: none; }
+
+    .area-cities { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 2.3rem; }
+    .about-img-main { height: 320px; }
+    .area-map { height: 280px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l2.9-2.9a5 5 0 01-6.3 6.3L8 19a2.12 2.12 0 01-3-3l6.3-6.3a5 5 0 016.3-6.3L14.7 6.3z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="nav-logo-text">WRENCH <span>23</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#service-area">Service Area</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="tel:4807764785" class="nav-cta">(480) 776-4785</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+      <li><a href="#about" onclick="toggleMenu()">About</a></li>
+      <li><a href="#service-area" onclick="toggleMenu()">Service Area</a></li>
+      <li><a href="#testimonials" onclick="toggleMenu()">Reviews</a></li>
+      <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+      <li><a href="tel:4807764785" style="color: #ff6b35; font-weight:700;">(480) 776-4785</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#ff6b35"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      5-Star Rated Mobile Mechanic
+    </div>
+    <h1>
+      Your Car Fixed
+      <span>Where You Are</span>
+    </h1>
+    <p class="hero-subtitle">Professional mobile auto repair that comes to your home, office, or wherever you need us. Mesa, Gilbert & surrounding areas.</p>
+    <div class="hero-location">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Mesa, Arizona &amp; Surrounding Cities
+    </div>
+    <div class="hero-stars">
+      <div class="stars-row">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#ff6b35"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#ff6b35"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#ff6b35"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#ff6b35"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#ff6b35"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <span class="hero-stars-text">5.0 Stars — Trusted by Hundreds of Drivers</span>
+    </div>
+    <div class="hero-buttons">
+      <a href="tel:4807764785" class="btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Call (480) 776-4785
+      </a>
+      <a href="#services" class="btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        View Services
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-number">500+</span>
+      <span class="stat-label">Vehicles Repaired</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">5.0</span>
+      <span class="stat-label">Star Rating</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">10+</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">24/7</span>
+      <span class="stat-label">Available</span>
+    </div>
+  </div>
+</div>
+
+<!-- PHONE BAR -->
+<div class="phone-bar">
+  <div class="phone-bar-inner">
+    <span class="phone-bar-text">Need a mechanic right now?</span>
+    <a href="tel:4807764785" class="phone-bar-number">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      (480) 776-4785
+    </a>
+    <span class="phone-bar-text">— We come to you!</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">What We Do</div>
+      <h2 class="section-title">Our Expert Services</h2>
+      <div class="section-line"></div>
+      <p class="section-desc">From diagnostics to major repairs, we bring dealership-quality service directly to your location across Mesa and the East Valley.</p>
+    </div>
+    <div class="services-grid">
+      <!-- Service 1 -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://source.unsplash.com/800x600/?car-engine,repair&sig=wrench23mo2" alt="Engine Diagnostics & Repair" loading="lazy">
+          <div class="service-card-img-overlay"></div>
+          <div class="service-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <h3 class="service-card-title">Engine Diagnostics & Repair</h3>
+          <p class="service-card-desc">Advanced OBD-II diagnostics and engine repair services using professional-grade equipment. We identify and fix the root cause fast.</p>
+          <a href="tel:4807764785" class="service-card-link">
+            Book Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Service 2 -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://source.unsplash.com/800x600/?brake-repair,automotive&sig=wrench23mo3" alt="Brake Service & Repair" loading="lazy">
+          <div class="service-card-img-overlay"></div>
+          <div class="service-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <h3 class="service-card-title">Brake Service & Repair</h3>
+          <p class="service-card-desc">Complete brake inspections, pad replacement, rotor resurfacing, and brake fluid flushes. Keep your vehicle stopping safely every time.</p>
+          <a href="tel:4807764785" class="service-card-link">
+            Book Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Service 3 -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://source.unsplash.com/800x600/?oil-change,car-maintenance&sig=wrench23mo4" alt="Oil Change & Fluid Services" loading="lazy">
+          <div class="service-card-img-overlay"></div>
+          <div class="service-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 8v4l2 2"/></svg>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <h3 class="service-card-title">Oil Change & Fluid Services</h3>
+          <p class="service-card-desc">Conventional, synthetic, and high-mileage oil changes plus transmission, coolant, and power steering fluid services at your location.</p>
+          <a href="tel:4807764785" class="service-card-link">
+            
