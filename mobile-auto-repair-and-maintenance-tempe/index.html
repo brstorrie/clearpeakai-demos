@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mobile Auto Repair and Maintenance in Tempe, Arizona. We come to you! 4.9 star rated mobile mechanic serving the greater Phoenix area. Call (602) 299-5304.">
+<title>Mobile Auto Repair & Maintenance | Tempe, AZ | (602) 299-5304</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --charcoal: #1a1a2e;
+    --charcoal-light: #16213e;
+    --orange: #e8500a;
+    --orange-light: #ff6b35;
+    --orange-dark: #c43d00;
+    --silver: #c0c0c0;
+    --silver-light: #e8e8e8;
+    --white: #ffffff;
+    --text-dark: #1a1a2e;
+    --text-mid: #444460;
+    --text-light: #888899;
+    --bg-light: #f5f5f8;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Work Sans', sans-serif; color: var(--text-dark); background: var(--white); overflow-x: hidden; }
+  h1, h2, h3, h4, h5 { font-family: 'Oswald', sans-serif; }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    background: rgba(26, 26, 46, 0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--orange);
+    transition: all 0.3s ease;
+  }
+  .navbar-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 70px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 42px; height: 42px; background: var(--orange); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo-text { display: flex; flex-direction: column; }
+  .nav-logo-title {
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 700;
+    color: var(--white); letter-spacing: 1px; line-height: 1.1;
+  }
+  .nav-logo-sub {
+    font-size: 0.65rem; color: var(--orange-light); letter-spacing: 2px;
+    text-transform: uppercase; font-weight: 500;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 32px; list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 500;
+    color: var(--silver-light); text-decoration: none; letter-spacing: 1px;
+    text-transform: uppercase; transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 2px; background: var(--orange); transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--orange-light); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    background: var(--orange); color: var(--white) !important;
+    padding: 10px 20px; border-radius: 4px; font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--orange-dark) !important; color: var(--white) !important; }
+  .nav-cta::after { display: none !important; }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px; cursor: pointer;
+    background: none; border: none; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 26px; height: 2px; background: var(--white);
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none; position: absolute; top: 70px; left: 0; width: 100%;
+    background: var(--charcoal); border-top: 1px solid var(--orange);
+    padding: 16px 0; flex-direction: column;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 500;
+    color: var(--silver-light); text-decoration: none; padding: 14px 24px;
+    letter-spacing: 1px; text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: color 0.2s, background 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--orange-light); background: rgba(232,80,10,0.08); }
+  .mobile-menu .mob-cta {
+    margin: 12px 24px 4px; background: var(--orange); text-align: center;
+    border-radius: 4px; border-bottom: none;
+  }
+  .mobile-menu .mob-cta:hover { background: var(--orange-dark); }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&h=1080&fit=crop');
+    background-size: cover; background-position: center;
+    transform: scale(1.04);
+    transition: transform 8s ease;
+  }
+  .hero-bg.loaded { transform: scale(1); }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(26,26,46,0.75) 50%, rgba(232,80,10,0.15) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1280px; margin: 0 auto; padding: 0 24px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    padding-top: 100px;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(232,80,10,0.2); border: 1px solid rgba(232,80,10,0.5);
+    color: var(--orange-light); padding: 8px 16px; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+  .hero-title {
+    font-family: 'Oswald', sans-serif; font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700; color: var(--white); line-height: 1.1;
+    letter-spacing: 1px; margin-bottom: 12px;
+  }
+  .hero-title span { color: var(--orange-light); }
+  .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.75);
+    font-weight: 300; line-height: 1.7; margin-bottom: 36px;
+    max-width: 520px;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--orange); color: var(--white);
+    padding: 16px 32px; border-radius: 4px;
+    font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600;
+    text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
+    transition: all 0.25s; box-shadow: 0 4px 24px rgba(232,80,10,0.4);
+  }
+  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(232,80,10,0.5); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--white);
+    padding: 15px 30px; border-radius: 4px; border: 2px solid rgba(255,255,255,0.4);
+    font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600;
+    text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover { border-color: var(--orange-light); color: var(--orange-light); transform: translateY(-2px); }
+  .hero-stats {
+    display: flex; gap: 32px; flex-wrap: wrap;
+  }
+  .hero-stat { display: flex; flex-direction: column; }
+  .hero-stat-num {
+    font-family: 'Oswald', sans-serif; font-size: 2rem; font-weight: 700;
+    color: var(--orange-light); line-height: 1;
+  }
+  .hero-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.55); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+  .hero-card {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 36px;
+  }
+  .hero-card-title {
+    font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: 600;
+    color: var(--white); margin-bottom: 20px; letter-spacing: 1px;
+  }
+  .hero-card-phone {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--orange); border-radius: 8px; padding: 16px 20px;
+    text-decoration: none; margin-bottom: 16px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .hero-card-phone:hover { background: var(--orange-dark); transform: scale(1.02); }
+  .hero-card-phone-label { font-size: 0.7rem; color: rgba(255,255,255,0.7); letter-spacing: 2px; text-transform: uppercase; }
+  .hero-card-phone-num {
+    font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700;
+    color: var(--white); letter-spacing: 1px;
+  }
+  .hero-card-feature {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.8); font-size: 0.9rem;
+  }
+  .hero-card-feature:last-child { border-bottom: none; }
+  .feat-dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; flex-shrink: 0; }
+  .hero-scroll {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: rgba(255,255,255,0.4); font-size: 0.7rem; letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer; z-index: 2;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  /* ===== SECTION COMMONS ===== */
+  section { padding: 100px 24px; }
+  .container { max-width: 1280px; margin: 0 auto; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--orange); margin-bottom: 14px;
+  }
+  .section-label::before {
+    content: ''; display: block; width: 24px; height: 2px; background: var(--orange);
+  }
+  .section-title {
+    font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; color: var(--text-dark); line-height: 1.15; margin-bottom: 16px;
+  }
+  .section-title span { color: var(--orange); }
+  .section-desc {
+    font-size: 1rem; color: var(--text-mid); line-height: 1.8; max-width: 600px;
+  }
+
+  /* ===== TRUST BAR ===== */
+  .trust-bar {
+    background: var(--charcoal); padding: 20px 24px;
+  }
+  .trust-bar-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-around;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 10px;
+    color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 500;
+  }
+  .trust-item svg { color: var(--orange); flex-shrink: 0; }
+  .trust-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.15); }
+
+  /* ===== SERVICES ===== */
+  .services { background: var(--bg-light); }
+  .services-header { text-align: center; margin-bottom: 60px; }
+  .services-header .section-label { justify-content: center; }
+  .services-header .section-desc { margin: 0 auto; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  }
+  .service-card {
+    background: var(--white); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .service-card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(0,0,0,0.14); }
+  .service-img-wrap { position: relative; overflow: hidden; height: 200px; }
+  .service-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .service-card:hover .service-img-wrap img { transform: scale(1.07); }
+  .service-img-badge {
+    position: absolute; top: 16px; left: 16px;
+    background: var(--orange); color: var(--white);
+    font-family: 'Oswald', sans-serif; font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; border-radius: 2px;
+  }
+  .service-body { padding: 24px; }
+  .service-icon {
+    width: 44px; height: 44px; background: rgba(232,80,10,0.1); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+  }
+  .service-name {
+    font-family: 'Oswald', sans-serif; font-size: 1.3rem; font-weight: 600;
+    color: var(--text-dark); margin-bottom: 8px; letter-spacing: 0.5px;
+  }
+  .service-desc { font-size: 0.875rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 18px; }
+  .service-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Oswald', sans-serif; font-size: 0.85rem; font-weight: 600;
+    color: var(--orange); text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
+    transition: gap 0.2s;
+  }
+  .service-link:hover { gap: 10px; }
+
+  /* ===== WHY CHOOSE US ===== */
+  .why { background: var(--charcoal); }
+  .why-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .why-image-wrap { position: relative; border-radius: 16px; overflow: hidden; }
+  .why-image-wrap img { width: 100%; height: 480px; object-fit: cover; display: block; }
+  .why-image-accent {
+    position: absolute; bottom: -1px; left: -1px; right: -1px;
+    height: 40%; background: linear-gradient(to top, rgba(26,26,46,0.9), transparent);
+  }
+  .why-badge-card {
+    position: absolute; bottom: 24px; left: 24px; right: 24px;
+    background: rgba(232,80,10,0.95); border-radius: 10px; padding: 16px 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .why-badge-num {
+    font-family: 'Oswald', sans-serif; font-size: 2.2rem; font-weight: 700;
+    color: var(--white); line-height: 1;
+  }
+  .why-badge-text { font-size: 0.82rem; color: rgba(255,255,255,0.85); line-height: 1.5; }
+  .why-content { }
+  .why-content .section-title { color: var(--white); }
+  .why-content .section-desc { color: rgba(255,255,255,0.65); margin-bottom: 40px; }
+  .why-items { display: flex; flex-direction: column; gap: 20px; }
+  .why-item {
+    display: flex; gap: 18px; align-items: flex-start;
+    padding: 20px; background: rgba(255,255,255,0.04); border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .why-item:hover { border-color: rgba(232,80,10,0.4); background: rgba(232,80,10,0.06); }
+  .why-item-icon {
+    width: 46px; height: 46px; background: rgba(232,80,10,0.15); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .why-item-title {
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600;
+    color: var(--white); margin-bottom: 4px;
+  }
+  .why-item-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  /* ===== ABOUT ===== */
+  .about { background: var(--white); }
+  .about-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .about-content {}
+  .about-content .section-desc { margin-bottom: 20px; }
+  .about-quote {
+    border-left: 4px solid var(--orange); padding: 16px 20px;
+    background: var(--bg-light); border-radius: 0 8px 8px 0; margin: 28px 0;
+    font-size: 1rem; color: var(--text-mid); font-style: italic; line-height: 1.8;
+  }
+  .about-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
+  .about-tag {
+    background: rgba(232,80,10,0.09); color: var(--orange-dark);
+    padding: 6px 14px; border-radius: 100px; font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .about-image-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .about-img-main { grid-column: 1 / -1; border-radius: 12px; overflow: hidden; height: 260px; }
+  .about-img-main img { width: 100%; height: 100%; object-fit: cover; }
+  .about-img-sm { border-radius: 10px; overflow: hidden; height: 160px; }
+  .about-img-sm img { width: 100%; height: 100%; object-fit: cover; }
+  .about-rating-card {
+    background: var(--charcoal); border-radius: 10px; padding: 20px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 160px;
+  }
+  .rating-num {
+    font-family: 'Oswald', sans-serif; font-size: 2.8rem; font-weight: 700;
+    color: var(--white); line-height: 1;
+  }
+  .rating-stars { display: flex; gap: 3px; margin: 8px 0; }
+  .rating-label { font-size: 0.7rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; text-align: center; }
+
+  /* ===== SERVICE AREA ===== */
+  .service-area { background: var(--bg-light); }
+  .service-area-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+  }
+  .area-cities { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+  .area-city {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--white); padding: 14px 16px; border-radius: 8px;
+    font-size: 0.9rem; font-weight: 500; color: var(--text-dark);
+    border: 1px solid var(--silver-light);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .area-city:hover { border-color: var(--orange); color: var(--orange); }
+  .area-city-dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; flex-shrink: 0; }
+  .area-map-placeholder {
+    background: var(--charcoal); border-radius: 16px; overflow: hidden;
+    height: 400px; position: relative; display: flex; align-items: center; justify-content: center;
+  }
+  .area-map-placeholder img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+  .area-map-overlay {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 12px;
+  }
+  .area-map-label {
+    font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 600;
+    color: var(--white); text-align: center; letter-spacing: 1px;
+  }
+  .area-map-sub { font-size: 0.85rem; color: rgba(255,255,255,0.6); text-align: center; }
+  .area-radius-badge {
+    background: var(--orange); color: var(--white);
+    font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 700;
+    padding: 10px 24px; border-radius: 100px; letter-spacing: 1px;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials { background: var(--white); }
+  .testimonials-header { text-align: center; margin-bottom: 60px; }
+  .testimonials-header .section-label { justify-content: center; }
+  .testimonials-header .section-desc { margin: 0 auto; }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  }
+  .testimonial-card {
+    background: var(--bg-light); border-radius: 12px; padding: 32px;
+    border: 1px solid var(--silver-light); position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.09); }
+  .testimonial-quote-icon {
+    position: absolute; top: 24px; right: 24px;
+    opacity: 0.12;
+  }
+  .testimonial-stars { display: flex; gap: 4px; margin-bottom: 16px; }
+  .testimonial-text {
+    font-size: 0.92rem; color: var(--text-mid); line-height: 1.8;
+    margin-bottom: 24px; font-style: italic;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .testimonial-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--charcoal); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .testimonial-avatar-initials {
+    font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--orange-light);
+  }
+  .testimonial-name {
+    font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600;
+    color: var(--text-dark); letter-spacing: 0.5px;
+  }
+  .testimonial-location { font-size: 0.75rem; color: var(--text-light); }
+  .testimonials-cta {
+    text-align: center; margin-top: 52px;
+    padding: 40px; background: var(--charcoal); border-radius: 16px;
+  }
+  .testimonials-cta h3 {
+    font-family: 'Oswald', sans-serif; font-size: 1.8rem; font-weight: 700;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .testimonials-cta p { color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+  .testimonials-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* ===== CONTACT ===== */
+  .contact { background: var(--bg-light); }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  }
+  .contact-info {}
+  .contact-info .section-desc { margin-bottom: 36px; }
+  .contact-detail {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 20px; background: var(--white); border-radius: 10px;
+    margin-bottom: 16px; border: 1px solid var(--silver-light);
+    transition: border-color 0.2s;
+  }
+  .contact-detail:hover { border-color: var(--orange); }
+  .contact-detail-icon {
+    width: 46px; height: 46px; background: rgba(232,80,10,0.1); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .contact-detail-label {
+    font-size: 0.7rem; color: var(--text-light); letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .contact-detail-value {
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600;
+    color: var(--text-dark);
+  }
+  .contact-detail-value a { color: var(--orange); text-decoration: none; }
+  .contact-detail-value a:hover { color: var(--orange-dark); }
+  .contact-form {
+    background: var(--white); border-radius: 16px; padding: 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  }
+  .contact-form h3 {
+    font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700;
+    color: var(--text-dark); margin-bottom: 24px; letter-spacing: 0.5px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label {
+    display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-mid);
+    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 12px 16px; border: 2px solid var(--silver-light);
+    border-radius: 6px; font-family: 'Work Sans', sans-serif; font-size: 0.9rem;
+    color: var(--text-dark); outline: none; transition: border-color 0.2s;
+    background: var(--bg-light);
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--orange); background: var(--white);
+  }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-submit {
+    width: 100%; background: var(--orange); color: var(--white);
+    border: none; padding: 16px; border-radius: 6px;
+    font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .form-submit:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+  /* ===== PHONE CTA BANNER ===== */
+  .phone-banner {
+    background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+    padding: 60px 24px; text-align: center;
+  }
+  .phone-banner-inner { max-width: 800px; margin: 0 auto; }
+  .phone-banner h2 {
+    font-family: 'Oswald', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700; color: var(--white); margin-bottom: 10px; letter-spacing: 1px;
+  }
+  .phone-banner p { color: rgba(255,255,255,0.8); font-size: 1rem; margin-bottom: 32px; }
+  .phone-banner-num {
+    display: inline-flex; align-items: center; gap: 14px;
+    background: rgba(0,0,0,0.2); color: var(--white);
+    padding: 20px 40px; border-radius: 8px; text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: background 0.2s, transform 0.2s;
+    margin-bottom: 20px;
+  }
+  .phone-banner-num:hover { background: rgba(0,0,0,0.35); transform: scale(1.04); }
+  .phone-banner-num span {
+    font-family: 'Oswald', sans-serif; font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700; letter-spacing: 2px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer { background: #0e0e1c; padding: 70px 24px 0; }
+  .footer-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+    padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-brand {}
+  .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .footer-logo-icon {
+    width: 42px; height: 42px; background: var(--orange); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .footer-logo-title {
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 700;
+    color: var(--white); letter-spacing: 1px;
+  }
+  .footer-brand p { font-size: 0.875rem; color: rgba(255,255,255,0.45); line-height: 1.8; margin-bottom: 24px; }
+  .footer-phone-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--orange-light); text-decoration: none; font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem; font-weight: 600; transition: color 0.2s;
+  }
+  .footer-phone-link:hover { color: var(--white); }
+  .footer-col h4 {
+    font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 600;
+    color: var(--white); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;
+    padding-bottom: 10px; border-bottom: 2px solid var(--orange);
+    display: inline-block;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a {
+    color: rgba(255,255,255,0.45); font-size: 0.875rem; text-decoration: none;
+    transition: color 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  .footer-links a:hover { color: var(--orange-light); }
+  .footer-links a::before {
+    content: ''; display: block; width: 6px; height: 1px; background: var(--orange); flex-shrink: 0;
+  }
+  .footer-bottom {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 0; flex-wrap: wrap; gap: 12px;
+  }
+  .footer-copyright { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+  .footer-legal {
+    display: flex; gap: 20px;
+  }
+  .footer-legal a {
+    font-size: 0.8rem; color: rgba(255,255,255,0.3); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-legal a:hover { color: var(--orange-light); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1100px) {
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-inner { gap: 48px; }
+    .about-inner { gap: 48px; }
+  }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero-content { grid-template-columns: 1fr; gap: 36px; text-align: center; padding-top: 110px; }
+    .hero-btns { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .hero-subtitle { margin-left: auto; margin-right: auto; }
+    .why-inner { grid-template-columns: 1fr; gap: 48px; }
+    .why-image-wrap { max-height: 340px; }
+    .why-image-wrap img { height: 340px; }
+    .about-inner { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; }
+    .service-area-inner { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+  }
+  @media (max-width: 640px) {
+    section { padding: 70px 16px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-card { padding: 24px 20px; }
+    .trust-divider { display: none; }
+    .trust-bar-inner { gap: 12px; }
+    .area-cities { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .contact-form { padding: 28px 20px; }
+    .hero-content { padding: 100px 16px 60px; }
+    .about-image-grid { grid-template-columns: 1fr; }
+    .about-img-main { grid-column: auto; }
+  }
+
+  /* Stars */
+  .star-filled { color: #f59e0b; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+        </svg>
+      </div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-title">AZ Mobile Mechanic</span>
+        <span class="nav-logo-sub">Tempe, Arizona</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#service-area">Service Area</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="tel:6022995304" class="nav-cta">Call Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#service-area">Service Area</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:6022995304" class="mob-cta">Call (602) 299-5304</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        4.9 Star Rated Mobile Mechanic
+      </div>
+      <h1 class="hero-title">We Bring the<br><span>Auto Repair Shop</span><br>To You</h1>
+      <p class="hero-subtitle">Professional mobile auto repair and maintenance serving Tempe and the greater Phoenix metro area. No shop, no wait — we fix your vehicle at your home or office.</p>
+      <div class="hero-btns">
+        <a href="tel:6022995304" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.86a16 16 0 006.29 6.29l1.14-1.14a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          (602) 299-5304
+        </a>
+        <a href="#services" class="btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          View Services
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">4.9</span>
+          <span class="hero-stat-label">Star Rating</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">500+</span>
+          <span class="hero-stat-label">Jobs Completed</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">10+</span>
+          <span class="hero-stat-label">Years Experience</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">30mi</span>
+          <span class="hero-stat-label">Service Radius</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="hero-card">
+        <div class="hero-card-title">Get Help Right Now</div>
+        <a href="tel:6022995304" class="hero-card-phone">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.86a16 16 0 006.29 6.29l1.14-1.14a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <div>
+            <div class="hero-card-phone-label">Call Us Anytime</div>
+            <div class="hero-card-phone-num">(602) 299-5304</div>
+          </div>
+        </a>
+        <div class="hero-card-feature"><div class="feat-dot"></div>We come to your location</div>
+        <div class="hero-card-feature"><div class="feat-dot"></div>Same-day appointments available</div>
+        <div class="hero-card-feature"><div class="feat-dot"></div>Upfront, transparent pricing</div>
+        <div class="hero-card-feature"><div class="feat-dot"></div>ASE-certified technicians</div>
+        <div class="hero-card-feature"><div class="feat-dot"></div>All makes &amp; models serviced</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('trust').scrollIntoView({behavior:'smooth'})">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    Scroll Down
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar" id="trust">
+  <div class="trust-bar-inner">
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      ASE Certified Technicians
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Same-Day Service Available
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Fully Insured &amp; Licensed
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Transparent Flat-Rate Pricing
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Serving Tempe, AZ &amp; Surrounding Areas
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Our <span>Mobile Repair</span> Services</h2>
+      <p class="section-desc">From routine maintenance to complex repairs — we handle it all at your location. No tow truck needed, no waiting room required.</p>
+    </div>
+    <div class="services-grid">
+
+      <!-- Service 1 -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="Oil Change Service" loading="lazy">
+          <div class="service-img-badge">Most Popular</div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="service-name">Oil Change &amp; Lube</div>
+          <p class="service-desc">Full synthetic, conventional, or high-mileage oil changes performed right at your driveway. Includes multi-point inspection and filter replacement.</p>
+          <a href="tel:6022995304" class="service-link">
+            Book Now
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=800&h=600&fit=crop" alt="Brake Service" loading="lazy">
+          <div class="service-img-badge">Safety Critical</div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="service-name">Brake Repair &amp; Service</div>
+          <p class="service-desc">Brake pad replacement, rotor resurfacing or replacement, caliper service, and brake fluid flushes. We ensure your safety on the road.</p>
+          <a href="tel:6022995304" class="service-link">
+            Book Now
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" alt="Battery Service" loading="lazy">
+          <div class="service-img-badge">Quick Fix</div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          </div>
+          <div class="service-name">Battery Replacement</div>
+          <p class="service-desc">Dead battery? We test, diagnose, and replace your battery on the spot. Stocking major brands to get you back on the road fast.</p>
+          <a href="tel:6022995304" class="service-link">
+            Book Now
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&h=600&fit=crop" alt="Engine Diagnostics" loading="lazy">
+          <div class="service-img-badge">Advanced</div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="service-name">Engine Diagnostics</div>
+          <p class="service-desc">Check engine light on? We use professional OBD-II diagnostic equipment to accurately identify any fault codes and develop a repair plan.</p>
+          <a href="tel:6022995304" class="service-link">
+            Book Now
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 5 -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&h=600&fit=crop" alt="Tire Service" loading="lazy">
+          <div class="service-img-badge">Essential</div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg>
+          </div>
+          <div class="service-name">Tire Rotation &amp; Inspection</div>
+          <p class="service-desc">Extend the life of your tires with professional rotation, pressure adjustment, tread depth inspection, and wheel lug torque verification.</p>
+          <a href="tel:6022995304" class="service-link">
+            Book Now
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 6 -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img
