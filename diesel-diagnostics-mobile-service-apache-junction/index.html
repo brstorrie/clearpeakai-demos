@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diesel Diagnostics Mobile Service | Apache Junction, AZ</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --charcoal: #1a1a2e;
+    --charcoal-light: #2d2d44;
+    --orange: #e8500a;
+    --orange-light: #ff6a1a;
+    --orange-dark: #c44008;
+    --silver: #b0b8c8;
+    --light-gray: #f4f5f7;
+    --white: #ffffff;
+    --text-dark: #1a1a2e;
+    --text-mid: #4a4a6a;
+    --text-light: #8a8aaa;
+    --border: #e0e4ee;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Work Sans', sans-serif; color: var(--text-dark); background: var(--white); overflow-x: hidden; }
+  h1, h2, h3, h4, h5 { font-family: 'Oswald', sans-serif; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(26,26,46,0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--orange);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 0.75rem; text-decoration: none;
+  }
+  .nav-logo-icon { width: 40px; height: 40px; flex-shrink: 0; }
+  .nav-logo-text { display: flex; flex-direction: column; }
+  .nav-logo-text span:first-child {
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 700;
+    color: var(--white); letter-spacing: 1px; line-height: 1.1;
+  }
+  .nav-logo-text span:last-child {
+    font-size: 0.65rem; color: var(--orange); letter-spacing: 2px;
+    font-family: 'Work Sans', sans-serif; font-weight: 500; text-transform: uppercase;
+  }
+  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--silver); text-decoration: none; font-size: 0.85rem;
+    font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    transition: color 0.3s; font-family: 'Work Sans', sans-serif;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange); color: var(--white) !important;
+    padding: 0.5rem 1.25rem; border-radius: 4px;
+    transition: background 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--orange-dark) !important; color: var(--white) !important; }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px; cursor: pointer;
+    background: none; border: none; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 26px; height: 2px;
+    background: var(--white); border-radius: 2px; transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none; position: fixed; top: 70px; left: 0; right: 0;
+    background: var(--charcoal); z-index: 999;
+    padding: 1.5rem 2rem; flex-direction: column; gap: 0;
+    border-bottom: 2px solid var(--orange);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--silver); text-decoration: none; font-size: 0.9rem;
+    font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    padding: 0.9rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--orange); }
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  /* HERO */
+  .hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: center;
+    overflow: hidden;
+    padding-top: 70px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&h=1080&fit=crop');
+    background-size: cover; background-position: center;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(105deg, rgba(26,26,46,0.96) 0%, rgba(26,26,46,0.85) 50%, rgba(232,80,10,0.25) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto;
+    padding: 4rem 2rem;
+    width: 100%;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(232,80,10,0.15); border: 1px solid rgba(232,80,10,0.4);
+    color: var(--orange-light); padding: 0.4rem 1rem; border-radius: 30px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 1.5rem;
+  }
+  .hero-badge-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--orange); animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+  .hero h1 {
+    font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 700;
+    color: var(--white); line-height: 1.05; margin-bottom: 1.5rem;
+    text-transform: uppercase; letter-spacing: 2px;
+    max-width: 750px;
+  }
+  .hero h1 .highlight { color: var(--orange); }
+  .hero p {
+    font-size: 1.15rem; color: rgba(255,255,255,0.78);
+    max-width: 560px; line-height: 1.7; margin-bottom: 2.5rem;
+    font-weight: 400;
+  }
+  .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--orange); color: var(--white);
+    padding: 1rem 2rem; border-radius: 5px;
+    text-decoration: none; font-family: 'Oswald', sans-serif;
+    font-size: 1.05rem; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; transition: all 0.3s;
+    border: 2px solid var(--orange); cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--orange-dark); border-color: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(232,80,10,0.4); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: transparent; color: var(--white);
+    padding: 1rem 2rem; border-radius: 5px;
+    text-decoration: none; font-family: 'Oswald', sans-serif;
+    font-size: 1.05rem; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; transition: all 0.3s;
+    border: 2px solid rgba(255,255,255,0.4);
+  }
+  .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+  .hero-stats {
+    display: flex; gap: 2.5rem; flex-wrap: wrap;
+    padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .hero-stat { display: flex; flex-direction: column; }
+  .hero-stat-number {
+    font-family: 'Oswald', sans-serif; font-size: 2.2rem;
+    font-weight: 700; color: var(--orange); line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.75rem; color: rgba(255,255,255,0.6);
+    letter-spacing: 1px; text-transform: uppercase; margin-top: 0.3rem;
+  }
+
+  /* SECTION GLOBALS */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--orange); font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .section-label::before {
+    content: ''; display: block; width: 30px; height: 2px; background: var(--orange);
+  }
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700;
+    color: var(--text-dark); text-transform: uppercase;
+    letter-spacing: 1px; line-height: 1.15; margin-bottom: 1rem;
+  }
+  .section-subtitle {
+    font-size: 1rem; color: var(--text-mid); line-height: 1.7;
+    max-width: 560px;
+  }
+  .section-header { margin-bottom: 3.5rem; }
+  .section-header.center { text-align: center; }
+  .section-header.center .section-label { justify-content: center; }
+  .section-header.center .section-label::before { display: none; }
+  .section-header.center .section-subtitle { margin: 0 auto; }
+
+  /* SERVICES */
+  .services { background: var(--light-gray); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+  .service-card {
+    background: var(--white); border-radius: 8px;
+    overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    transition: all 0.35s; border: 1px solid var(--border);
+    display: flex; flex-direction: column;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.13); }
+  .service-card:hover .service-img img { transform: scale(1.06); }
+  .service-img { position: relative; height: 200px; overflow: hidden; }
+  .service-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .service-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,26,46,0.7) 0%, transparent 60%);
+  }
+  .service-icon-wrap {
+    position: absolute; bottom: -22px; left: 1.5rem;
+    width: 44px; height: 44px; background: var(--orange); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 15px rgba(232,80,10,0.4);
+    z-index: 1;
+  }
+  .service-body { padding: 2.2rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+  .service-body h3 {
+    font-size: 1.2rem; font-weight: 700; color: var(--text-dark);
+    text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.75rem;
+  }
+  .service-body p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.65; flex: 1; }
+  .service-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    color: var(--orange); font-size: 0.82rem; font-weight: 600;
+    text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
+    margin-top: 1.25rem; transition: gap 0.3s;
+  }
+  .service-link:hover { gap: 0.7rem; }
+
+  /* WHY CHOOSE US */
+  .why { background: var(--charcoal); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .why-image-wrap { position: relative; }
+  .why-image-main {
+    width: 100%; border-radius: 8px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .why-image-main img { width: 100%; height: 480px; object-fit: cover; display: block; }
+  .why-image-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--orange); padding: 1.5rem;
+    border-radius: 8px; text-align: center;
+    box-shadow: 0 8px 30px rgba(232,80,10,0.5);
+  }
+  .why-image-badge-num {
+    font-family: 'Oswald', sans-serif; font-size: 2.5rem;
+    font-weight: 700; color: var(--white); line-height: 1;
+  }
+  .why-image-badge-text {
+    font-size: 0.7rem; color: rgba(255,255,255,0.85);
+    letter-spacing: 1.5px; text-transform: uppercase; margin-top: 0.25rem;
+  }
+  .why .section-title { color: var(--white); }
+  .why .section-label { color: var(--orange-light); }
+  .why-intro { color: rgba(255,255,255,0.65); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2.5rem; }
+  .why-features { display: flex; flex-direction: column; gap: 1.25rem; }
+  .why-feature {
+    display: flex; gap: 1.1rem; align-items: flex-start;
+    padding: 1.1rem 1.25rem; background: rgba(255,255,255,0.04);
+    border-radius: 6px; border: 1px solid rgba(255,255,255,0.08);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .why-feature:hover { border-color: rgba(232,80,10,0.3); background: rgba(232,80,10,0.05); }
+  .why-feature-icon {
+    width: 42px; height: 42px; background: rgba(232,80,10,0.15);
+    border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; border: 1px solid rgba(232,80,10,0.3);
+  }
+  .why-feature-text h4 {
+    font-size: 0.95rem; font-weight: 600; color: var(--white);
+    margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .why-feature-text p { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.55; }
+
+  /* ABOUT */
+  .about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-content {}
+  .about-content .section-subtitle { margin-bottom: 1.5rem; }
+  .about-content p { font-size: 0.95rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 1.25rem; }
+  .about-certs {
+    display: flex; gap: 1.5rem; flex-wrap: wrap; margin: 2rem 0;
+  }
+  .about-cert {
+    display: flex; align-items: center; gap: 0.6rem;
+    background: var(--light-gray); padding: 0.6rem 1rem;
+    border-radius: 5px; border-left: 3px solid var(--orange);
+  }
+  .about-cert span { font-size: 0.8rem; font-weight: 600; color: var(--text-dark); letter-spacing: 0.5px; }
+  .about-image { position: relative; }
+  .about-image img { width: 100%; border-radius: 8px; box-shadow: 0 15px 50px rgba(0,0,0,0.15); }
+  .about-image-accent {
+    position: absolute; top: -15px; left: -15px; right: 30px; bottom: 30px;
+    border: 3px solid var(--orange); border-radius: 8px; z-index: -1;
+  }
+
+  /* SERVICE AREA */
+  .service-area { background: var(--light-gray); }
+  .area-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .area-map-placeholder {
+    background: var(--charcoal); border-radius: 8px;
+    height: 400px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .area-map-placeholder img { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; position: absolute; inset: 0; }
+  .area-map-content { position: relative; z-index: 1; text-align: center; padding: 2rem; }
+  .area-map-content svg { margin-bottom: 1rem; }
+  .area-map-content h3 {
+    font-family: 'Oswald', sans-serif; color: var(--white);
+    font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;
+  }
+  .area-map-content p { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+  .area-list-wrap {}
+  .area-radius-badge {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--orange); color: var(--white);
+    padding: 0.6rem 1.2rem; border-radius: 5px; margin-bottom: 2rem;
+    font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .area-cities {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 2rem;
+  }
+  .area-city {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.6rem 0.75rem; background: var(--white);
+    border-radius: 4px; border: 1px solid var(--border);
+    font-size: 0.85rem; color: var(--text-dark); font-weight: 500;
+    transition: border-color 0.3s;
+  }
+  .area-city:hover { border-color: var(--orange); }
+  .area-city-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+  .area-note {
+    font-size: 0.85rem; color: var(--text-mid); line-height: 1.6;
+    padding: 1rem; background: var(--white); border-radius: 5px;
+    border-left: 3px solid var(--orange);
+  }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--charcoal); }
+  .testimonials .section-title { color: var(--white); }
+  .testimonials .section-label { color: var(--orange-light); }
+  .stars-rating {
+    display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2.5rem;
+    justify-content: center;
+  }
+  .stars-row { display: flex; gap: 4px; }
+  .stars-text { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+  .stars-score {
+    font-family: 'Oswald', sans-serif; font-size: 1.4rem;
+    color: var(--white); font-weight: 700;
+  }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .testimonial-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 2rem; transition: border-color 0.3s, background 0.3s;
+  }
+  .testimonial-card:hover { border-color: rgba(232,80,10,0.4); background: rgba(232,80,10,0.04); }
+  .testimonial-quote-icon { margin-bottom: 1.25rem; }
+  .testimonial-text {
+    font-size: 0.92rem; color: rgba(255,255,255,0.72); line-height: 1.75;
+    margin-bottom: 1.5rem; font-style: italic;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+  .testimonial-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--orange); display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem;
+    color: var(--white); font-weight: 700; flex-shrink: 0;
+  }
+  .testimonial-name {
+    font-family: 'Oswald', sans-serif; color: var(--white);
+    font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .testimonial-location { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 2px; }
+
+  /* CONTACT */
+  .contact { background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+  .contact-info .section-subtitle { margin-bottom: 2.5rem; }
+  .contact-methods { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2.5rem; }
+  .contact-method {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.25rem; background: var(--light-gray); border-radius: 6px;
+    border: 1px solid var(--border); transition: border-color 0.3s;
+  }
+  .contact-method:hover { border-color: var(--orange); }
+  .contact-method-icon {
+    width: 44px; height: 44px; background: var(--orange); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .contact-method-text label {
+    display: block; font-size: 0.72rem; color: var(--text-light);
+    font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.3rem;
+  }
+  .contact-method-text a, .contact-method-text span {
+    font-family: 'Oswald', sans-serif; font-size: 1.05rem;
+    color: var(--text-dark); text-decoration: none; font-weight: 600;
+    transition: color 0.3s;
+  }
+  .contact-method-text a:hover { color: var(--orange); }
+  .contact-phone-cta {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: var(--charcoal); color: var(--white);
+    padding: 1.1rem 1.75rem; border-radius: 6px;
+    text-decoration: none; font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem; font-weight: 700; letter-spacing: 1px;
+    transition: all 0.3s; border: 2px solid var(--charcoal);
+    justify-content: center; text-align: center;
+  }
+  .contact-phone-cta:hover { background: var(--orange); border-color: var(--orange); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(232,80,10,0.35); }
+  .contact-form-wrap {}
+  .form-group { margin-bottom: 1.25rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  label.field-label {
+    display: block; font-size: 0.78rem; font-weight: 600;
+    color: var(--text-mid); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.4rem;
+  }
+  input, select, textarea {
+    width: 100%; padding: 0.85rem 1rem;
+    background: var(--light-gray); border: 1.5px solid var(--border);
+    border-radius: 5px; font-family: 'Work Sans', sans-serif;
+    font-size: 0.92rem; color: var(--text-dark);
+    transition: border-color 0.3s, box-shadow 0.3s; outline: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--orange); box-shadow: 0 0 0 3px rgba(232,80,10,0.12);
+    background: var(--white);
+  }
+  textarea { resize: vertical; min-height: 120px; }
+  select { appearance: none; cursor: pointer; }
+  .form-submit {
+    width: 100%; padding: 1rem 2rem;
+    background: var(--orange); color: var(--white);
+    border: none; border-radius: 5px; cursor: pointer;
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem;
+    font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    transition: all 0.3s; display: flex; align-items: center;
+    justify-content: center; gap: 0.6rem;
+  }
+  .form-submit:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(232,80,10,0.35); }
+
+  /* CTA BANNER */
+  .cta-banner {
+    background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+    padding: 4rem 2rem; text-align: center;
+  }
+  .cta-banner h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--white);
+    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem;
+  }
+  .cta-banner p { color: rgba(255,255,255,0.85); font-size: 1rem; margin-bottom: 2rem; }
+  .cta-banner-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-white {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--white); color: var(--orange);
+    padding: 1rem 2rem; border-radius: 5px;
+    text-decoration: none; font-family: 'Oswald', sans-serif;
+    font-size: 1.05rem; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; transition: all 0.3s;
+    border: 2px solid var(--white);
+  }
+  .btn-white:hover { background: transparent; color: var(--white); transform: translateY(-2px); }
+  .btn-outline-white {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: transparent; color: var(--white);
+    padding: 1rem 2rem; border-radius: 5px;
+    text-decoration: none; font-family: 'Oswald', sans-serif;
+    font-size: 1.05rem; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; transition: all 0.3s;
+    border: 2px solid rgba(255,255,255,0.6);
+  }
+  .btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer { background: #0e0e1e; padding: 4rem 2rem 1.5rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand .nav-logo { margin-bottom: 1rem; display: inline-flex; }
+  .footer-brand p { font-size: 0.87rem; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 1.5rem; max-width: 280px; }
+  .footer-social { display: flex; gap: 0.75rem; }
+  .footer-social-btn {
+    width: 36px; height: 36px; border-radius: 5px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s; cursor: pointer; text-decoration: none;
+  }
+  .footer-social-btn:hover { background: var(--orange); border-color: var(--orange); }
+  .footer-col h4 {
+    font-family: 'Oswald', sans-serif; font-size: 0.95rem;
+    color: var(--white); text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 1.25rem; padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--orange); display: inline-block;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-links a {
+    color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.87rem;
+    transition: color 0.3s; display: flex; align-items: center; gap: 0.5rem;
+  }
+  .footer-links a:hover { color: var(--orange-light); }
+  .footer-links a::before { content: '—'; font-size: 0.7rem; opacity: 0.4; }
+  .footer-contact-list { display: flex; flex-direction: column; gap: 0.85rem; }
+  .footer-contact-item { display: flex; align-items: flex-start; gap: 0.7rem; }
+  .footer-contact-item svg { flex-shrink: 0; margin-top: 2px; }
+  .footer-contact-item span { color: rgba(255,255,255,0.5); font-size: 0.83rem; line-height: 1.5; }
+  .footer-contact-item a { color: var(--orange-light); text-decoration: none; font-size: 0.83rem; font-weight: 600; }
+  .footer-contact-item a:hover { color: var(--white); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.5rem; display: flex;
+    justify-content: space-between; align-items: center; flex-wrap: gap;
+    gap: 1rem;
+  }
+  .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+  .footer-bottom-links { display: flex; gap: 1.5rem; }
+  .footer-bottom-links a { font-size: 0.78rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.3s; }
+  .footer-bottom-links a:hover { color: var(--orange); }
+
+  /* SCROLL TO TOP */
+  .scroll-top {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 900;
+    width: 46px; height: 46px; background: var(--orange);
+    border-radius: 5px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; border: none; box-shadow: 0 4px 20px rgba(232,80,10,0.4);
+    transition: all 0.3s; opacity: 0; pointer-events: none;
+  }
+  .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  .scroll-top:hover { background: var(--orange-dark); transform: translateY(-3px); }
+
+  /* PHONE FLOAT */
+  .phone-float {
+    position: fixed; bottom: 2rem; left: 2rem; z-index: 900;
+    display: flex; align-items: center; gap: 0.75rem;
+    background: var(--charcoal); color: var(--white);
+    padding: 0.75rem 1.25rem; border-radius: 40px;
+    text-decoration: none; border: 2px solid var(--orange);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    font-family: 'Oswald', sans-serif; font-size: 0.95rem; font-weight: 600;
+    transition: all 0.3s; letter-spacing: 0.5px;
+  }
+  .phone-float:hover { background: var(--orange); border-color: var(--orange); transform: translateY(-2px); }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 900px) {
+    .why-grid, .about-grid, .contact-grid, .area-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .why-image-badge { bottom: 10px; right: 10px; }
+    .about-image-accent { display: none; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    .area-cities { grid-template-columns: 1fr; }
+    section { padding: 3.5rem 1.25rem; }
+    .cta-banner { padding: 3rem 1.25rem; }
+    .phone-float { display: none; }
+    .hero-content { padding: 2.5rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="40" height="40" rx="6" fill="#e8500a"/>
+      <path d="M8 28 L12 14 L18 22 L22 16 L28 24 L32 20" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="20" cy="20" r="5" stroke="white" stroke-width="2" fill="none"/>
+      <circle cx="20" cy="20" r="1.5" fill="white"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span>Diesel Diagnostics</span>
+      <span>Mobile Service</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#area">Service Area</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="tel:4802019661" class="nav-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.06 6.06l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      (480) 201-9661
+    </a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#why" onclick="closeMobile()">Why Choose Us</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#area" onclick="closeMobile()">Service Area</a>
+  <a href="#testimonials" onclick="closeMobile()">Reviews</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="tel:4802019661" style="color:#e8500a;font-weight:700;">Call (480) 201-9661</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Apache Junction, Arizona
+    </div>
+    <h1>Expert <span class="highlight">Diesel</span> Repair<br>At Your Location</h1>
+    <p>Professional diesel diagnostics and repair that comes to you. From engine overhauls to electrical systems — we handle it all on-site, saving you time and towing costs.</p>
+    <div class="hero-cta-group">
+      <a href="tel:4802019661" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.06 6.06l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call (480) 201-9661
+      </a>
+      <a href="#services" class="btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        Our Services
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-number">4.7</span>
+        <span class="hero-stat-label">Star Rating</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-number">500+</span>
+        <span class="hero-stat-label">Vehicles Serviced</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-number">15+</span>
+        <span class="hero-stat-label">Years Experience</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-number">50mi</span>
+        <span class="hero-stat-label">Service Radius</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Comprehensive Diesel Services</h2>
+      <p class="section-subtitle">From routine maintenance to complex engine diagnostics, our fully equipped mobile unit handles it all right where you are.</p>
+    </div>
+    <div class="services-grid">
+
+      <!-- Card 1 -->
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="Diesel Engine Diagnostics" loading="lazy">
+          <div class="service-img-overlay"></div>
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </div>
+        </div>
+        <div class="service-body">
+          <h3>Engine Diagnostics</h3>
+          <p>Advanced computer diagnostics for all diesel engines. We pinpoint issues fast with professional-grade OBD scan tools, saving you time and guesswork on complex fault codes.</p>
+          <a href="#contact" class="service-link">
+            Book Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=800&h=600&fit=crop" alt="Diesel Engine Repair" loading="lazy">
+          <div class="service-img-overlay"></div>
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+        </div>
+        <div class="service-body">
+          <h3>Engine Repair &amp; Overhaul</h3>
+          <p>Complete diesel engine repair services including cylinder head work, injector replacement, turbocharger service, and full rebuilds performed at your location.</p>
+          <a href="#contact" class="service-link">
+            Book Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" alt="Electrical Systems" loading="lazy">
+          <div class="service-img-overlay"></div>
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+        </div>
+        <div class="service-body">
+          <h3>Electrical Systems</h3>
+          <p>Comprehensive electrical diagnostics and repair for diesel vehicles. Wiring harnesses, sensors, alternators, starters, and ECM troubleshooting handled expertly.</p>
+          <a href="#contact" class="service-link">
+            Book Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&h=600&fit=crop" alt="Preventive Maintenance" loading="lazy">
+          <div class="service-img-overlay"></div>
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+        </div>
+        <div class="service-body">
+          <h3>Preventive Maintenance</h3>
+          <p>Keep your diesel running strong with scheduled maintenance including oil changes, filter replacements, fluid checks, and full multi-point inspections at your site.</p>
+          <a href="#contact" class="service-link">
+            Book Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&h=600&fit=crop" alt="Fuel System Service" loading="lazy">
+          <div class="service-img-overlay"></div>
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M3 22V10l9-8 9 8v12H3z"/><rect x="9" y="14" width="6" height="8" rx="1"/></svg>
+          </div>
+        </div>
+        <div class="service-body">
+          <h3>Fuel System Service</h3>
+          <p>Full diesel fuel system diagnostics and repair. Injector cleaning and replacement, fuel pump service, high-pressure common rail systems, and injection timing calibration.</p>
+          <a href="#contact" class="service-link">
+            Book Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="Emissions & DEF Systems" loading="lazy">
+          <div class="service-img-overlay"></div>
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+        </div>
+        <div class="service-body">
+          <h3>Emissions &amp; DEF Systems</h3>
+          <p>DPF cleaning and replacement, SCR system repair, EGR service, and DEF system diagnostics. We keep your diesel compliant and running at peak efficiency.</p>
+          <a href="#contact" class="service-link">
+            Book Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-image-wrap">
+        <div class="why-image-main">
+          <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&h=800&fit=crop" alt="Diesel mechanic at work" loading="lazy">
+        </div>
+        <div class="why-image-badge">
+          <div class="why-image-badge-num">4.7</div>
+          <div class="why-image-badge-text">Star Rating</div>
+        </div>
+      </div>
+      <div class="why-content">
+        <div class="section-label">Why Choose Us</div>
+        <h2 class="section-title">The Mobile Diesel Experts You Can Trust</h2>
+        <p class="why-intro">We bring dealership-level diesel expertise directly to your driveway, job site, or fleet yard. No towing costs, no waiting rooms — just fast, honest, professional service.</p>
+        <div class="why-features">
+
+          <div class="why-feature">
+            <div class="why-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="why-feature-text">
+              <h4>Fast Response Times</h4>
+              <p>We dispatch quickly to minimize your downtime. Most appointments available same day or next day throughout the East Valley.</p>
+            </div>
+          </div>
+
+          <div class="why-feature">
+            <div class="why-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <div class="why-feature-text">
+              <h4>Professional Equipment</h4>
+              <p>Fully equipped service vehicle with industry-leading diagnostic tools, specialty diesel equipment, and a comprehensive parts inventory.</p>
+            </div>
+          </div>
+
+          <div class="why-feature">
+            <div class="why-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="why-feature-text">
+              <h4>Transparent Pricing</h4>
+              <p>No hidden fees. We provide detailed quotes before work begins and only proceed with your full approval. What we quote is what you pay.</p>
+            </div>
+          </div>
+
+          <div class="why-feature">
+            <div class="why-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="why-feature-text">
+              <h4>Warrantied Repairs</h4>
+              <p>All repairs are backed by a labor warranty. We stand behind our work and ensure your diesel stays running long after we leave your site.</p>
+            </div>
+          </div>
+
+          <div class="why-feature">
+            <div class="why-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8500a" stroke-width="2.2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <div class="why-feature-text">
+              <h4>Fleet Service Available</h4>
+              <p>We offer dedicated fleet maintenance programs for businesses in the Apache Junction area. Keep your whole fleet running with scheduled on-site visits.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-content">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">

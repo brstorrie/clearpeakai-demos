@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BJ's Mobile Mechanic AZ LLC - Professional mobile auto repair in Queen Creek, Arizona. 4.9 star rated mechanic that comes to you. Call (520) 414-1774">
+<title>BJ's Mobile Mechanic AZ LLC | Queen Creek, Arizona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --charcoal: #1a1a2e;
+    --charcoal-mid: #16213e;
+    --charcoal-light: #0f3460;
+    --orange: #e94f0c;
+    --orange-light: #ff6a2f;
+    --orange-dark: #c43d08;
+    --silver: #c8d0d8;
+    --silver-light: #e8ecf0;
+    --white: #ffffff;
+    --text-dark: #1a1a2e;
+    --text-mid: #4a5568;
+    --text-light: #718096;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Work Sans', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5 { font-family: 'Oswald', sans-serif; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(26, 26, 46, 0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--orange);
+    padding: 0 5%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--orange);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-logo-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+  }
+  .nav-logo-text span { color: var(--orange); }
+  .nav-logo-sub {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: var(--silver);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--silver-light);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+    text-transform: uppercase;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange);
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: 4px;
+    transition: background 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--orange-dark) !important; color: var(--white) !important; }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 8px;
+  }
+  .hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px; left: 0; right: 0;
+    background: var(--charcoal);
+    border-bottom: 2px solid var(--orange);
+    z-index: 999;
+    padding: 20px 5%;
+  }
+  .mobile-menu.open { display: block; }
+  .mobile-menu ul { list-style: none; }
+  .mobile-menu ul li { border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .mobile-menu ul li a {
+    display: block;
+    padding: 14px 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--silver-light);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .mobile-menu ul li a:hover { color: var(--orange); }
+  .mobile-cta-wrap { margin-top: 16px; }
+  .mobile-cta-wrap a {
+    display: block;
+    background: var(--orange);
+    color: var(--white);
+    text-align: center;
+    padding: 14px;
+    border-radius: 4px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+
+  /* HERO */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&h=1080&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, rgba(26,26,46,0.96) 0%, rgba(26,26,46,0.85) 50%, rgba(26,26,46,0.6) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 120px 8% 80px;
+    max-width: 800px;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(233,79,12,0.15);
+    border: 1px solid var(--orange);
+    border-radius: 30px;
+    padding: 8px 18px;
+    margin-bottom: 28px;
+  }
+  .hero-badge-text {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--orange-light);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .hero-stars {
+    display: flex;
+    gap: 3px;
+  }
+  .hero-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .hero-title span { color: var(--orange); }
+  .hero-subtitle {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-weight: 400;
+    color: var(--silver);
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .hero-description {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: rgba(200, 208, 216, 0.9);
+    line-height: 1.75;
+    margin-bottom: 40px;
+    max-width: 560px;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--orange);
+    color: var(--white);
+    padding: 16px 32px;
+    border-radius: 4px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(233,79,12,0.4);
+  }
+  .btn-primary:hover {
+    background: var(--orange-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(233,79,12,0.5);
+  }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--white);
+    padding: 16px 32px;
+    border-radius: 4px;
+    border: 2px solid rgba(255,255,255,0.4);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+    transform: translateY(-2px);
+  }
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .hero-stat { }
+  .hero-stat-number {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--silver);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+  .hero-divider { width: 1px; background: rgba(255,255,255,0.2); align-self: stretch; }
+  .hero-phone-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    z-index: 3;
+    background: var(--orange);
+    padding: 14px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .hero-phone-bar a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+  .hero-phone-bar span {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+  }
+
+  /* SECTION STYLES */
+  section { position: relative; }
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .section-label {
+    display: inline-block;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+  .section-title span { color: var(--orange); }
+  .section-title.light { color: var(--white); }
+  .section-desc {
+    font-size: 1rem;
+    color: var(--text-mid);
+    line-height: 1.75;
+    max-width: 580px;
+    margin: 16px auto 0;
+  }
+  .section-desc.light { color: rgba(200,208,216,0.85); }
+  .section-divider {
+    width: 60px;
+    height: 4px;
+    background: var(--orange);
+    margin: 16px auto 0;
+    border-radius: 2px;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+  }
+
+  /* SERVICES */
+  #services {
+    padding: 90px 0;
+    background: var(--silver-light);
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .service-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.35s;
+    position: relative;
+  }
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+  }
+  .service-card:hover .service-overlay { opacity: 1; }
+  .service-img-wrap {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+  }
+  .service-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .service-card:hover .service-img-wrap img { transform: scale(1.08); }
+  .service-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(233,79,12,0.85), transparent);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .service-icon-badge {
+    position: absolute;
+    bottom: -20px;
+    left: 24px;
+    width: 48px;
+    height: 48px;
+    background: var(--orange);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(233,79,12,0.4);
+    z-index: 2;
+  }
+  .service-body { padding: 36px 24px 28px; }
+  .service-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+  .service-desc {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--orange);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: gap 0.3s;
+  }
+  .service-link:hover { gap: 12px; }
+
+  /* WHY CHOOSE US */
+  #why {
+    padding: 90px 0;
+    background: var(--charcoal);
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .why-image-wrap {
+    position: relative;
+  }
+  .why-image-main {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    height: 480px;
+    display: block;
+  }
+  .why-image-badge {
+    position: absolute;
+    bottom: -24px;
+    right: -24px;
+    width: 130px;
+    height: 130px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 30px rgba(233,79,12,0.5);
+    border: 4px solid var(--charcoal);
+  }
+  .why-badge-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+  .why-badge-text {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    padding: 0 10px;
+  }
+  .why-features { display: flex; flex-direction: column; gap: 28px; margin-top: 36px; }
+  .why-feature {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .why-feature-icon {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    background: rgba(233,79,12,0.12);
+    border: 1px solid rgba(233,79,12,0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .why-feature-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .why-feature-desc {
+    font-size: 0.9rem;
+    color: rgba(200,208,216,0.8);
+    line-height: 1.7;
+  }
+
+  /* ABOUT */
+  #about {
+    padding: 90px 0;
+    background: var(--white);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+  }
+  .about-content { }
+  .about-text {
+    font-size: 1rem;
+    color: var(--text-mid);
+    line-height: 1.85;
+    margin-bottom: 20px;
+  }
+  .about-highlight {
+    background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-light) 100%);
+    border-left: 4px solid var(--orange);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin: 30px 0;
+  }
+  .about-highlight p {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+  }
+  .about-highlight p span { color: var(--orange); }
+  .about-img-wrap { position: relative; }
+  .about-img-main {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 8px;
+    display: block;
+  }
+  .about-img-overlay {
+    position: absolute;
+    bottom: 24px;
+    left: -24px;
+    background: var(--orange);
+    border-radius: 8px;
+    padding: 20px 24px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+  .about-overlay-number {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+  .about-overlay-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+  .about-contact-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  .about-phone-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--orange);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .about-phone-btn:hover { background: var(--orange-dark); transform: translateY(-2px); }
+  .about-address {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  /* SERVICE AREA */
+  #service-area {
+    padding: 90px 0;
+    background: var(--silver-light);
+  }
+  .area-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .area-list { }
+  .area-intro {
+    font-size: 1rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .area-cities {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .area-city {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--white);
+    border-radius: 6px;
+    padding: 12px 16px;
+    border: 1px solid rgba(233,79,12,0.15);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    transition: all 0.3s;
+  }
+  .area-city:hover { border-color: var(--orange); color: var(--orange); }
+  .area-cta-box {
+    background: var(--charcoal);
+    border-radius: 8px;
+    padding: 40px;
+    border-top: 4px solid var(--orange);
+  }
+  .area-cta-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .area-cta-text {
+    font-size: 0.95rem;
+    color: rgba(200,208,216,0.8);
+    line-height: 1.75;
+    margin-bottom: 28px;
+  }
+  .area-cta-phone {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--orange);
+    border-radius: 6px;
+    padding: 18px 24px;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin-bottom: 16px;
+  }
+  .area-cta-phone:hover { background: var(--orange-dark); }
+  .area-phone-icon { flex-shrink: 0; }
+  .area-cta-phone-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+  .area-cta-phone-label {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .area-address-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 6px;
+  }
+  .area-address-text {
+    font-size: 0.875rem;
+    color: rgba(200,208,216,0.8);
+    line-height: 1.6;
+  }
+
+  /* TESTIMONIALS */
+  #testimonials {
+    padding: 90px 0;
+    background: var(--charcoal);
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .testimonial-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 32px 28px;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .testimonial-card:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(233,79,12,0.4);
+    transform: translateY(-4px);
+  }
+  .testimonial-card::before {
+    content: '"';
+    font-family: 'Oswald', sans-serif;
+    font-size: 6rem;
+    color: var(--orange);
+    opacity: 0.15;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    line-height: 1;
+    font-weight: 700;
+  }
+  .testimonial-stars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+  .testimonial-text {
+    font-size: 0.95rem;
+    color: rgba(200,208,216,0.85);
+    line-height: 1.8;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .testimonial-avatar {
+    width: 44px;
+    height: 44px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+  .testimonial-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .testimonial-location {
+    font-size: 0.78rem;
+    color: rgba(200,208,216,0.6);
+    margin-top: 2px;
+  }
+  .testimonials-cta {
+    text-align: center;
+    margin-top: 50px;
+    padding: 40px;
+    background: rgba(233,79,12,0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(233,79,12,0.25);
+  }
+  .testimonials-cta p {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  /* CONTACT */
+  #contact {
+    padding: 90px 0;
+    background: var(--white);
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .contact-info { }
+  .contact-info-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .contact-info-desc {
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+  .contact-details { display: flex; flex-direction: column; gap: 20px; }
+  .contact-detail-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .contact-detail-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    background: rgba(233,79,12,0.1);
+    border: 1px solid rgba(233,79,12,0.25);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .contact-detail-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .contact-detail-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  a.contact-detail-value:hover { color: var(--orange); }
+  .contact-phone-big {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+    border-radius: 8px;
+    padding: 22px 28px;
+    text-decoration: none;
+    margin-top: 36px;
+    transition: all 0.3s;
+    box-shadow: 0 6px 25px rgba(233,79,12,0.35);
+  }
+  .contact-phone-big:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(233,79,12,0.45); }
+  .contact-phone-big-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+  .contact-phone-big-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 2px;
+  }
+  .contact-form {
+    background: var(--silver-light);
+    border-radius: 8px;
+    padding: 40px;
+    border-top: 4px solid var(--orange);
+  }
+  .form-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form-group {
+    margin-bottom: 18px;
+  }
+  .form-group label {
+    display: block;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.3s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(233,79,12,0.1); }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-submit {
+    width: 100%;
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    padding: 16px;
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .form-submit:hover { background: var(--orange-dark); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal);
+    border-top: 2px solid var(--orange);
+    padding: 60px 0 0;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+  }
+  .footer-brand-desc {
+    font-size: 0.875rem;
+    color: rgba(200,208,216,0.7);
+    line-height: 1.8;
+    margin: 16px 0 24px;
+  }
+  .footer-phone-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--orange);
+    color: var(--white);
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: background 0.3s;
+  }
+  .footer-phone-link:hover { background: var(--orange-dark); }
+  .footer-col-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(233,79,12,0.3);
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a {
+    font-size: 0.875rem;
+    color: rgba(200,208,216,0.7);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--orange); }
+  .footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .footer-contact-text {
+    font-size: 0.85rem;
+    color: rgba(200,208,216,0.7);
+    line-height: 1.6;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  a.footer-contact-text:hover { color: var(--orange); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-copyright {
+    font-size: 0.8rem;
+    color: rgba(200,208,216,0.5);
+  }
+  .footer-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: rgba(200,208,216,0.7);
+    font-weight: 500;
+  }
+
+  /* STICKY PHONE */
+  .sticky-phone {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+    background: var(--orange);
+    border-radius: 50px;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 30px rgba(233,79,12,0.5);
+    text-decoration: none;
+    transition: all 0.3s;
+    animation: pulse-ring 2.5s ease-out infinite;
+  }
+  .sticky-phone:hover { background: var(--orange-dark); transform: scale(1.05); }
+  .sticky-phone-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgba(233,79,12,0.5); }
+    70% { box-shadow: 0 0 0 15px rgba(233,79,12,0); }
+    100% { box-shadow: 0 0 0 0 rgba(233,79,12,0); }
+  }
+
+  /* MEDIA QUERIES */
+  @media (max-width: 1024px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 5%; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero-content { padding: 110px 5% 80px; }
+    .hero-stats { gap: 24px; }
+    .hero-divider { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; gap: 50px; }
+    .why-image-badge { right: 16px; bottom: -20px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-img-overlay { left: 16px; }
+    .area-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-form { padding: 28px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .sticky-phone { bottom: 16px; right: 16px; padding: 12px 18px; }
+    .sticky-phone-text { font-size: 0.9rem; }
+    .area-cities { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .hero-buttons { flex-direction: column; }
+    .btn-primary, .btn-secondary { justify-content: center; }
+    .hero-badge { flex-wrap: wrap; justify-content: center; }
+    .area-cta-box { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <path d="M4 18L8 8l5 3 5-3 4 10" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="8" cy="19" r="2.5" stroke="#fff" stroke-width="2"/>
+        <circle cx="18" cy="19" r="2.5" stroke="#fff" stroke-width="2"/>
+        <path d="M2 14h22" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="nav-logo-text">BJ's Mobile <span>Mechanic</span></div>
+      <div class="nav-logo-sub">AZ LLC &mdash; Queen Creek</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#service-area">Service Area</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="tel:5204141774" class="nav-cta">Call Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Choose Us</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#service-area">Service Area</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="mobile-cta-wrap">
+    <a href="tel:5204141774">Call (520) 414-1774</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="hero-stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#e94f0c"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#e94f0c"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#e94f0c"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#e94f0c"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#e94f0c"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <span class="hero-badge-text">4.9 Star Rated &mdash; Queen Creek, AZ</span>
+    </div>
+    <h1 class="hero-title">We Come To <span>You.</span><br>No Tow Needed.</h1>
+    <p class="hero-subtitle">Queen Creek's Trusted Mobile Mechanic</p>
+    <p class="hero-description">Professional, certified automotive repair services delivered directly to your home, office, or wherever you're stranded. Save time and money with BJ's Mobile Mechanic AZ LLC.</p>
+    <div class="hero-buttons">
+      <a href="tel:5204141774" class="btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.66A2 2 0 012 .9h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.37a16 16 0 006.72 6.72l1.75-1.75a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        (520) 414-1774
+      </a>
+      <a href="#services" class="btn-secondary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        View Services
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-number">4.9</div>
+        <div class="hero-stat-label">Star Rating</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">500+</div>
+        <div class="hero-stat-label">Vehicles Serviced</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">24/7</div>
+        <div class="hero-stat-label">Available</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">10+</div>
+        <div class="hero-stat-label">Years Experience</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-phone-bar">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.66A2 2 0 012 .9h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.37a16 16 0 006.72 6.72l1.75-1.75a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    <span>Broken down? Call now &mdash;</span>
+    <a href="tel:5204141774">(520) 414-1774</a>
+    <span>&mdash; We come to you, anywhere in the East Valley!</span>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">What We Do</span>
+      <h2 class="section-title">Professional Mobile <span>Auto Repair</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">From routine maintenance to complex repairs, BJ's Mobile Mechanic brings expert service directly to your location across the East Valley.</p>
+    </div>
+    <div class="services-grid">
+      <!-- Card 1 -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="Engine Diagnostics" loading="lazy">
+          <div class="service-overlay"></div>
+          <div class="service-icon-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 001.14 7.4a10 10 0 002.87 11.07"/><path d="M22.5 12A10.48 10.48 0 0022 9"/></svg>
+          </div>
+        </div>
+        <div class="service-body">
+          <h3 class="service-name">Engine Diagnostics</h3>
+          <p class="service-desc">Advanced computerized diagnostics to pinpoint exactly what's wrong with your engine. Check engine light? We'll decode it fast and get you back on the road.</p>
+          <a href="tel:5204141774" class="service-link">
+            Get a Quote
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=800&h=600&fit=crop" alt="Oil Change" loading="lazy">
+          <div class="service-overlay"></div>
+          <div class="service-icon-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2a6 6 0 00-6 6c0 4 6 14 6 14s6-10 6-14a6 6 0 00-6-6z"/><circle cx="14" cy="8" r="2"/></svg>
+          </div>
+        </div>
+        <div class="service-body">
+          <h3 class="service-name">Oil Change &amp; Fluids</h3>
+          <p class="service-desc">Complete oil and filter service with conventional, synthetic blend, or full synthetic oil. We also check and top off all vital fluids to keep your vehicle running optimally.</p>
+          <a href="tel:5204141774" class="service-link">
+            Get a Quote
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" alt="Brake Service" loading="lazy">
+          <div class="service-overlay"></div>
+          <div class="service-icon-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/></svg>
+          </div>
+        </div>
+        <div class="service-body">
+          <h3 class="service-name">Brake Repair &amp; Service</h3>
+          <p class="service-desc">Complete brake inspection, pad replacement, rotor resurfacing or replacement, and brake fluid service. Don't ignore those squeals — your safety depends on it.</p>
+          <a href="tel:5204141774" class="service-link">
+            Get a Quote
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&h=600&fit=crop" alt="Battery Service" loading="lazy">
+          <div class="service-overlay"></div>
+          <div class="service-icon-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          </div>
+        </div>
+        <div class="service-body">
+          <h3 class="service-name">Battery &amp; Electrical</h3>
+          <p class="service-desc">Battery testing, replacement, alternator and starter diagnosis. We'll come to you when your car won't start, so you're never left stranded in the Arizona heat.</p>
+          <a href="tel:5204141774" class="service-link">
+            Get a Quote
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke
