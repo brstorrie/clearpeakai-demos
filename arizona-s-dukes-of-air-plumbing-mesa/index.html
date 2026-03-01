@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arizona's Dukes of Air & Plumbing | Mesa, AZ</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1a2d42;
+    --navy-light: #243b55;
+    --silver: #c8d6e5;
+    --silver-light: #eef2f7;
+    --orange: #e8650a;
+    --orange-light: #f97c2b;
+    --white: #ffffff;
+    --gray-light: #f4f6f9;
+    --gray-mid: #8a9bb0;
+    --text-dark: #0d1b2a;
+    --text-body: #2d3e50;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Work Sans', sans-serif; color: var(--text-body); background: var(--white); overflow-x: hidden; }
+  h1, h2, h3, h4, h5 { font-family: 'Oswald', sans-serif; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(13, 27, 42, 0.97);
+    backdrop-filter: blur(10px);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+    border-bottom: 2px solid var(--orange);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 42px; height: 42px; background: var(--orange);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .nav-logo-text { color: var(--white); }
+  .nav-logo-text .brand-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.5px;
+  }
+  .nav-logo-text .brand-sub {
+    font-size: 0.68rem; color: var(--silver); font-weight: 400; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    color: var(--silver); text-decoration: none; font-family: 'Work Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange); color: var(--white) !important;
+    padding: 10px 20px; border-radius: 6px; font-weight: 600 !important;
+    transition: background 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--orange-light) !important; color: var(--white) !important; }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px; cursor: pointer;
+    background: none; border: none; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 26px; height: 2px; background: var(--white); border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none; position: fixed; top: 72px; left: 0; right: 0;
+    background: var(--navy); z-index: 999;
+    padding: 1.5rem 2rem; flex-direction: column; gap: 1rem;
+    border-bottom: 2px solid var(--orange);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--silver); text-decoration: none; font-size: 1rem; font-weight: 500;
+    padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-family: 'Work Sans', sans-serif;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  /* HERO */
+  .hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; padding-top: 72px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&h=1080&fit=crop');
+    background-size: cover; background-position: center;
+    transform: scale(1.05);
+    animation: heroBgZoom 12s ease-in-out infinite alternate;
+  }
+  @keyframes heroBgZoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.12); }
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(13,27,42,0.92) 0%, rgba(13,27,42,0.7) 50%, rgba(232,101,10,0.25) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2; text-align: center;
+    max-width: 900px; padding: 2rem;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(232,101,10,0.2); border: 1px solid var(--orange);
+    color: var(--orange); padding: 8px 18px; border-radius: 50px;
+    font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 700; color: var(--white);
+    line-height: 1.05; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .hero h1 span { color: var(--orange); }
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem); color: var(--silver);
+    font-weight: 300; margin-bottom: 2.5rem; line-height: 1.7;
+    max-width: 620px; margin-left: auto; margin-right: auto;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--orange); color: var(--white);
+    padding: 16px 36px; border-radius: 8px;
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600;
+    text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
+    transition: all 0.3s; box-shadow: 0 6px 30px rgba(232,101,10,0.5);
+    border: 2px solid var(--orange);
+  }
+  .btn-primary:hover {
+    background: var(--orange-light); transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(232,101,10,0.6);
+  }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--white);
+    padding: 16px 36px; border-radius: 8px;
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600;
+    text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
+    transition: all 0.3s; border: 2px solid rgba(255,255,255,0.5);
+  }
+  .btn-secondary:hover {
+    border-color: var(--white); background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+  }
+  .hero-stats {
+    display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat-num {
+    font-family: 'Oswald', sans-serif; font-size: 2.2rem; font-weight: 700;
+    color: var(--orange); line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.8rem; color: var(--silver); text-transform: uppercase;
+    letter-spacing: 1px; margin-top: 4px;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--silver); font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 1px; cursor: pointer; z-index: 2;
+    animation: scrollBounce 2s ease-in-out infinite;
+  }
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* SECTIONS COMMON */
+  section { padding: 5rem 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .section-label {
+    display: inline-block; color: var(--orange);
+    font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; color: var(--navy); text-transform: uppercase;
+    line-height: 1.1; margin-bottom: 1rem;
+  }
+  .section-title span { color: var(--orange); }
+  .section-desc {
+    font-size: 1.05rem; color: var(--gray-mid); max-width: 580px;
+    line-height: 1.8; margin-bottom: 3rem;
+  }
+  .section-header-center { text-align: center; }
+  .section-header-center .section-desc { margin-left: auto; margin-right: auto; }
+  .divider {
+    width: 60px; height: 4px; background: var(--orange);
+    border-radius: 2px; margin-bottom: 1.5rem;
+  }
+  .divider-center { margin-left: auto; margin-right: auto; }
+
+  /* ANNOUNCEMENT BAR */
+  .announce-bar {
+    background: var(--orange); color: var(--white);
+    text-align: center; padding: 10px 1rem;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.5px;
+    position: relative; z-index: 1001; margin-top: 72px;
+  }
+  .announce-bar strong { font-weight: 700; }
+
+  /* SERVICES */
+  .services { background: var(--gray-light); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .service-card {
+    background: var(--white); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    transition: all 0.35s; position: relative;
+  }
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.14);
+  }
+  .service-card-img {
+    position: relative; height: 200px; overflow: hidden;
+  }
+  .service-card-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .service-card:hover .service-card-img img { transform: scale(1.08); }
+  .service-card-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(13,27,42,0.7) 100%);
+  }
+  .service-icon {
+    position: absolute; bottom: 1rem; left: 1rem;
+    width: 44px; height: 44px; background: var(--orange);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  }
+  .service-card-body { padding: 1.5rem; }
+  .service-card-body h3 {
+    font-family: 'Oswald', sans-serif; font-size: 1.3rem; font-weight: 600;
+    color: var(--navy); margin-bottom: 0.6rem; text-transform: uppercase;
+  }
+  .service-card-body p {
+    font-size: 0.9rem; color: var(--gray-mid); line-height: 1.7; margin-bottom: 1rem;
+  }
+  .service-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--orange); font-size: 0.88rem; font-weight: 600;
+    text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px;
+    transition: gap 0.3s;
+  }
+  .service-link:hover { gap: 10px; }
+
+  /* WHY CHOOSE US */
+  .why { background: var(--navy); }
+  .why-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .why-text .section-title { color: var(--white); }
+  .why-text .section-desc { color: var(--silver); }
+  .why-features { display: flex; flex-direction: column; gap: 1.5rem; }
+  .why-feature {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    padding: 1.2rem; background: rgba(255,255,255,0.04);
+    border-radius: 10px; border-left: 3px solid var(--orange);
+    transition: background 0.3s;
+  }
+  .why-feature:hover { background: rgba(255,255,255,0.08); }
+  .why-feat-icon {
+    width: 48px; height: 48px; background: rgba(232,101,10,0.15);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .why-feat-content h4 {
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600;
+    color: var(--white); margin-bottom: 4px; text-transform: uppercase;
+  }
+  .why-feat-content p { font-size: 0.88rem; color: var(--silver); line-height: 1.6; }
+  .why-image-wrap {
+    position: relative;
+  }
+  .why-image-wrap img {
+    width: 100%; height: 500px; object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  }
+  .why-badge {
+    position: absolute; bottom: -1.5rem; left: -1.5rem;
+    background: var(--orange); border-radius: 12px;
+    padding: 1.2rem 1.5rem; text-align: center;
+    box-shadow: 0 8px 30px rgba(232,101,10,0.4);
+  }
+  .why-badge-num {
+    font-family: 'Oswald', sans-serif; font-size: 2.5rem; font-weight: 700;
+    color: var(--white); line-height: 1;
+  }
+  .why-badge-text { font-size: 0.78rem; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ABOUT */
+  .about { background: var(--white); }
+  .about-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .about-image-wrap { position: relative; }
+  .about-image-wrap img {
+    width: 100%; height: 480px; object-fit: cover; object-position: top;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+  .about-image-accent {
+    position: absolute; top: -1.5rem; right: -1.5rem;
+    width: 120px; height: 120px; background: var(--orange);
+    border-radius: 12px; z-index: -1;
+  }
+  .about-image-accent2 {
+    position: absolute; bottom: -1.5rem; left: -1.5rem;
+    width: 80px; height: 80px; background: var(--navy);
+    border-radius: 12px; z-index: -1;
+  }
+  .about-text p {
+    font-size: 1rem; color: var(--text-body); line-height: 1.85;
+    margin-bottom: 1.2rem;
+  }
+  .about-creds {
+    display: flex; gap: 2rem; margin-top: 2rem; flex-wrap: wrap;
+  }
+  .about-cred {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .about-cred-icon {
+    width: 40px; height: 40px; background: rgba(232,101,10,0.1);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  }
+  .about-cred-text { font-size: 0.85rem; font-weight: 600; color: var(--navy); }
+
+  /* PHONE CTA BAND */
+  .cta-band {
+    background: linear-gradient(135deg, var(--orange) 0%, #c8540a 100%);
+    padding: 3rem 0;
+  }
+  .cta-band-inner {
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+  }
+  .cta-band-text h2 {
+    font-family: 'Oswald', sans-serif; font-size: 2rem; font-weight: 700;
+    color: var(--white); text-transform: uppercase; margin-bottom: 4px;
+  }
+  .cta-band-text p { color: rgba(255,255,255,0.85); font-size: 0.95rem; }
+  .cta-band-phone {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--white); color: var(--orange);
+    padding: 16px 32px; border-radius: 8px;
+    font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: 700;
+    text-decoration: none; letter-spacing: 1px;
+    transition: all 0.3s; white-space: nowrap;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.2);
+  }
+  .cta-band-phone:hover { transform: scale(1.04); box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+
+  /* SERVICE AREA */
+  .area { background: var(--gray-light); }
+  .area-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .area-cities {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+  }
+  .area-city {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0.85rem 1rem; background: var(--white);
+    border-radius: 8px; font-size: 0.92rem; font-weight: 500;
+    color: var(--navy); border-left: 3px solid var(--orange);
+    transition: all 0.3s;
+  }
+  .area-city:hover { background: var(--orange); color: var(--white); transform: translateX(4px); }
+  .area-city:hover .area-dot { background: var(--white); }
+  .area-dot {
+    width: 8px; height: 8px; background: var(--orange); border-radius: 50%; flex-shrink: 0;
+    transition: background 0.3s;
+  }
+  .area-map-wrap {
+    background: var(--navy); border-radius: 16px; overflow: hidden;
+    height: 420px; position: relative;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  }
+  .area-map-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  }
+  .area-map-placeholder h3 {
+    font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: var(--white); text-transform: uppercase;
+  }
+  .area-map-placeholder p { color: var(--silver); font-size: 0.9rem; text-align: center; max-width: 260px; }
+  .area-map-pin {
+    width: 60px; height: 60px; background: var(--orange);
+    border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(232,101,10,0.5);
+    animation: pinPulse 2s ease-in-out infinite;
+  }
+  .area-map-pin svg { transform: rotate(45deg); }
+  @keyframes pinPulse {
+    0%, 100% { box-shadow: 0 8px 24px rgba(232,101,10,0.5); }
+    50% { box-shadow: 0 8px 40px rgba(232,101,10,0.8); }
+  }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--white); }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .testimonial-card {
+    background: var(--gray-light); border-radius: 12px; padding: 2rem;
+    position: relative; transition: all 0.3s;
+    border-top: 4px solid transparent;
+  }
+  .testimonial-card:hover {
+    border-top-color: var(--orange);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    transform: translateY(-4px);
+  }
+  .testimonial-quote {
+    color: var(--orange); margin-bottom: 1rem;
+  }
+  .testimonial-text {
+    font-size: 0.95rem; color: var(--text-body); line-height: 1.75;
+    margin-bottom: 1.5rem; font-style: italic;
+  }
+  .testimonial-footer {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .testimonial-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--navy); display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white);
+    flex-shrink: 0;
+  }
+  .testimonial-name { font-weight: 600; color: var(--navy); font-size: 0.95rem; }
+  .testimonial-location { font-size: 0.8rem; color: var(--gray-mid); }
+  .stars { display: flex; gap: 2px; margin-bottom: 0.75rem; }
+
+  /* GALLERY STRIP */
+  .gallery-strip {
+    background: var(--navy); padding: 0;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    height: 260px;
+  }
+  .gallery-strip-item {
+    position: relative; overflow: hidden; cursor: pointer;
+  }
+  .gallery-strip-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.7) saturate(0.8);
+    transition: all 0.4s;
+  }
+  .gallery-strip-item:hover img { filter: brightness(1) saturate(1.1); transform: scale(1.05); }
+  .gallery-strip-item-overlay {
+    position: absolute; inset: 0;
+    background: rgba(232,101,10,0.15);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .gallery-strip-item:hover .gallery-strip-item-overlay { opacity: 1; }
+
+  /* CONTACT */
+  .contact { background: var(--navy); }
+  .contact .section-title { color: var(--white); }
+  .contact .section-desc { color: var(--silver); }
+  .contact .divider { background: var(--orange); }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-info-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.2rem; background: rgba(255,255,255,0.05);
+    border-radius: 10px; transition: background 0.3s;
+  }
+  .contact-info-item:hover { background: rgba(255,255,255,0.09); }
+  .contact-info-icon {
+    width: 46px; height: 46px; background: var(--orange);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-info-text h4 {
+    font-family: 'Oswald', sans-serif; font-size: 0.85rem; font-weight: 600;
+    color: var(--gray-mid); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
+  }
+  .contact-info-text a,
+  .contact-info-text p {
+    color: var(--white); font-size: 1rem; font-weight: 500; text-decoration: none;
+    transition: color 0.3s;
+  }
+  .contact-info-text a:hover { color: var(--orange); }
+  .contact-form {
+    background: rgba(255,255,255,0.05); border-radius: 16px;
+    padding: 2rem; border: 1px solid rgba(255,255,255,0.1);
+  }
+  .contact-form h3 {
+    font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 600;
+    color: var(--white); text-transform: uppercase; margin-bottom: 1.5rem;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem; }
+  .form-group label {
+    font-size: 0.82rem; font-weight: 600; color: var(--silver);
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px; padding: 12px 14px;
+    color: var(--white); font-family: 'Work Sans', sans-serif; font-size: 0.95rem;
+    outline: none; transition: border-color 0.3s, background 0.3s;
+    width: 100%;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.35); }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--orange); background: rgba(255,255,255,0.12);
+  }
+  .form-group select option { background: var(--navy-mid); color: var(--white); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .btn-form {
+    width: 100%; padding: 15px; background: var(--orange);
+    color: var(--white); border: none; border-radius: 8px;
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-form:hover { background: var(--orange-light); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: #060e17; padding: 3rem 0 1.5rem;
+    border-top: 2px solid rgba(255,255,255,0.08);
+  }
+  .footer-inner {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    margin-bottom: 2.5rem;
+  }
+  .footer-brand p {
+    color: var(--gray-mid); font-size: 0.88rem; line-height: 1.7; margin: 1rem 0 1.5rem;
+    max-width: 280px;
+  }
+  .footer-social { display: flex; gap: 10px; }
+  .footer-social a {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s; text-decoration: none;
+  }
+  .footer-social a:hover { background: var(--orange); }
+  .footer-col h4 {
+    font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600;
+    color: var(--white); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem; border-bottom: 2px solid var(--orange);
+    display: inline-block;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+  .footer-col ul li a {
+    color: var(--gray-mid); text-decoration: none; font-size: 0.88rem;
+    transition: color 0.3s; display: flex; align-items: center; gap: 6px;
+  }
+  .footer-col ul li a:hover { color: var(--orange); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.5rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p { color: var(--gray-mid); font-size: 0.82rem; }
+  .footer-bottom-links { display: flex; gap: 1.5rem; }
+  .footer-bottom-links a { color: var(--gray-mid); font-size: 0.82rem; text-decoration: none; transition: color 0.3s; }
+  .footer-bottom-links a:hover { color: var(--orange); }
+
+  /* RATING BADGE */
+  .rating-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50px; padding: 8px 16px; margin-top: 1rem;
+  }
+  .rating-stars-sm { display: flex; gap: 2px; }
+  .rating-text { color: var(--white); font-size: 0.88rem; font-weight: 600; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero-stats { gap: 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .why-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .why-image-wrap img { height: 320px; }
+    .why-badge { left: 0; bottom: -1rem; }
+    .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .about-image-wrap img { height: 320px; }
+    .area-inner { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .gallery-strip { grid-template-columns: repeat(2, 1fr); height: 320px; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .cta-band-inner { flex-direction: column; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+    .announce-bar { font-size: 0.78rem; }
+  }
+  @media (max-width: 480px) {
+    section { padding: 3.5rem 0; }
+    .hero-actions { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-secondary { width: 100%; max-width: 300px; justify-content: center; }
+    .area-cities { grid-template-columns: 1fr; }
+    .about-creds { flex-direction: column; gap: 1rem; }
+    .gallery-strip { grid-template-columns: 1fr; height: auto; }
+    .gallery-strip-item { height: 160px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="nav-logo-text">
+      <div class="brand-name">Arizona's Dukes</div>
+      <div class="brand-sub">Air & Plumbing</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#area">Service Area</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="tel:" class="nav-cta">Call Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#about" onclick="closeMobile()">About Us</a>
+  <a href="#area" onclick="closeMobile()">Service Area</a>
+  <a href="#testimonials" onclick="closeMobile()">Reviews</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="tel:" style="color: var(--orange); font-weight: 700; font-size: 1.1rem;">Call Now</a>
+</div>
+
+<!-- ANNOUNCE BAR -->
+<div class="announce-bar">
+  <strong>4.9-Star Rated</strong> Air & Plumbing Experts in Mesa, AZ &mdash; Serving the Greater Phoenix Area &mdash; <strong>Call For A Free Estimate!</strong>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      4.9 Star Rated in Mesa, Arizona
+    </div>
+    <h1>
+      Arizona's Dukes of<br>
+      <span>Air & Plumbing</span>
+    </h1>
+    <p class="hero-subtitle">
+      Expert HVAC and plumbing services for Mesa homeowners. Reliable, fast, and professional — when you need it most.
+    </p>
+    <div class="hero-actions">
+      <a href="tel:" class="btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.36-.36a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16z"/></svg>
+        Call For Free Estimate
+      </a>
+      <a href="#services" class="btn-secondary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        Explore Services
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">4.9</div>
+        <div class="hero-stat-label">Star Rating</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">500+</div>
+        <div class="hero-stat-label">Happy Customers</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">15+</div>
+        <div class="hero-stat-label">Years Experience</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">24/7</div>
+        <div class="hero-stat-label">Emergency Service</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header-center" style="text-align:center;">
+      <span class="section-label">What We Do</span>
+      <h2 class="section-title">Expert Air &amp; <span>Plumbing Services</span></h2>
+      <div class="divider divider-center"></div>
+      <p class="section-desc">From AC tune-ups to full plumbing overhauls, Arizona's Dukes deliver top-tier service with honesty and integrity throughout Mesa and the Valley.</p>
+    </div>
+    <div class="services-grid">
+
+      <!-- Service 1 -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="AC Repair & Installation">
+          <div class="service-card-img-overlay"></div>
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <h3>AC Repair &amp; Installation</h3>
+          <p>Beat the Arizona heat with our professional AC repair, maintenance, and new system installation services. Fast response, fair pricing.</p>
+          <a href="#contact" class="service-link">
+            Get Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=800&h=600&fit=crop" alt="Heating Systems">
+          <div class="service-card-img-overlay"></div>
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 007-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 007 7z"/></svg>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <h3>Heating Systems</h3>
+          <p>Expert furnace and heat pump installation, repair, and tune-up services to keep your home warm during Arizona's cooler months.</p>
+          <a href="#contact" class="service-link">
+            Get Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" alt="Plumbing Services">
+          <div class="service-card-img-overlay"></div>
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <h3>Full Plumbing Services</h3>
+          <p>From leaky faucets to full pipe replacement — our licensed plumbers handle all residential and commercial plumbing needs quickly.</p>
+          <a href="#contact" class="service-link">
+            Get Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&h=600&fit=crop" alt="Air Quality">
+          <div class="service-card-img-overlay"></div>
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"/></svg>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <h3>Indoor Air Quality</h3>
+          <p>Improve your home's air with duct cleaning, air purifiers, UV systems, and humidity control solutions tailored for Arizona climates.</p>
+          <a href="#contact" class="service-link">
+            Get Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 5 -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&h=600&fit=crop" alt="Water Heaters">
+          <div class="service-card-img-overlay"></div>
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <h3>Water Heater Services</h3>
+          <p>Installation, repair, and replacement of traditional and tankless water heaters. Same-day service available for urgent situations.</p>
+          <a href="#contact" class="service-link">
+            Get Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 6 -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="Preventive Maintenance">
+          <div class="service-card-img-overlay"></div>
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <h3>Preventive Maintenance</h3>
+          <p>Protect your investment with our comprehensive maintenance plans. Regular tune-ups extend system life and prevent costly breakdowns.</p>
+          <a href="#contact" class="service-link">
+            Get Service
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="why-inner">
+      <div class="why-text">
+        <span class="section-label">Why Choose Us</span>
+        <h2 class="section-title">Mesa's Most <span>Trusted</span> Service Team</h2>
+        <div class="divider"></div>
+        <p class="section-desc">When your air conditioning fails or a pipe bursts, you need a team you can trust. Arizona's Dukes deliver honest work at fair prices — every single time.</p>
+        <div class="why-features">
+          <div class="why-feature">
+            <div class="why-feat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8650a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="why-feat-content">
+              <h4>Licensed &amp; Insured Professionals</h4>
+              <p>All our technicians are fully licensed, bonded, and insured for your peace of mind on every job.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-feat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8650a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="why-feat-content">
+              <h4>Fast Response Times</h4>
+              <p>We understand urgency. Same-day and emergency services available 24/7 across Mesa and the Valley.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-feat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8650a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <div class="why-feat-content">
+              <h4>Upfront, Transparent Pricing</h4>
+              <p>No surprise bills. We provide clear estimates before any work begins and stick to our quoted price.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-feat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8650a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="why-feat-content">
+              <h4>Workmanship Guarantee</h4>
+              <p>Every job is backed by our satisfaction guarantee. We stand behind our work — 100%.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-image-wrap">
+        <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&h=800&fit=crop" alt="Professional technician at work">
+        <div class="why-badge">
+          <div class="why-badge-num">4.9</div>
+          <div class="why-badge-text">Star Rating</div>
+          <div style="display:flex;justify-content:center;gap:2px;margin-top:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2
