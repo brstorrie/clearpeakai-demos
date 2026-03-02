@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cooling & Plumbing Co | Mesa, Arizona</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Work Sans', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
+  h1,h2,h3,h4 { font-family: 'Oswald', sans-serif; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    background: rgba(18,18,30,0.97); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 72px;
+    border-bottom: 2px solid #e8500a;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.4);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-icon { width: 42px; height: 42px; }
+  .nav-logo-text { font-family: 'Oswald', sans-serif; font-size: 1.25rem; color: #fff; line-height: 1.1; letter-spacing: 0.5px; }
+  .nav-logo-text span { color: #e8500a; }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a { color: #ccc; text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: #e8500a; }
+  .nav-cta {
+    background: #e8500a; color: #fff !important; padding: 10px 22px;
+    border-radius: 4px; font-weight: 600 !important; transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: #c43d08 !important; color: #fff !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 26px; height: 2px; background: #fff; border-radius: 2px; transition: 0.3s; }
+  .mobile-menu { display: none; position: fixed; top: 72px; left: 0; width: 100%; background: #12121e; z-index: 999; padding: 24px 5%; flex-direction: column; gap: 0; border-bottom: 2px solid #e8500a; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: #ccc; text-decoration: none; font-size: 1rem; font-weight: 500; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08); text-transform: uppercase; letter-spacing: 0.5px; }
+  .mobile-menu a:last-child { border: none; }
+  .mobile-menu a:hover { color: #e8500a; }
+
+  /* HERO */
+  .hero {
+    position: relative; min-height: 100vh; display: flex; align-items: center;
+    background: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&h=1080&fit=crop') center/cover no-repeat;
+    padding-top: 72px;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(12,12,22,0.93) 0%, rgba(18,18,30,0.75) 60%, rgba(232,80,10,0.15) 100%);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 780px; padding: 0 5%; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(232,80,10,0.15); border: 1px solid rgba(232,80,10,0.5);
+    color: #e8500a; padding: 8px 18px; border-radius: 30px;
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 700; color: #fff;
+    line-height: 1.05; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: #e8500a; }
+  .hero p {
+    font-size: clamp(1rem, 1.8vw, 1.2rem); color: rgba(255,255,255,0.8);
+    line-height: 1.7; max-width: 580px; margin-bottom: 36px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #e8500a; color: #fff; padding: 16px 32px;
+    border-radius: 4px; text-decoration: none; font-family: 'Oswald', sans-serif;
+    font-size: 1.05rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(232,80,10,0.4);
+  }
+  .btn-primary:hover { background: #c43d08; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,80,10,0.5); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: #fff; padding: 16px 32px;
+    border-radius: 4px; text-decoration: none; font-family: 'Oswald', sans-serif;
+    font-size: 1.05rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    border: 2px solid rgba(255,255,255,0.4); transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: #e8500a; color: #e8500a; }
+  .hero-stats {
+    position: absolute; bottom: 48px; left: 5%; right: 5%; z-index: 2;
+    display: flex; gap: 0; max-width: 700px;
+    background: rgba(255,255,255,0.05); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden;
+  }
+  .stat { flex: 1; padding: 20px 24px; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
+  .stat:last-child { border: none; }
+  .stat-num { font-family: 'Oswald', sans-serif; font-size: 2rem; font-weight: 700; color: #e8500a; }
+  .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+  /* SECTION COMMON */
+  section { padding: 96px 5%; }
+  .section-label {
+    display: inline-block; color: #e8500a; font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .section-title { font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; text-transform: uppercase; color: #12121e; line-height: 1.1; margin-bottom: 16px; }
+  .section-title span { color: #e8500a; }
+  .section-sub { font-size: 1.05rem; color: #555; line-height: 1.7; max-width: 600px; }
+  .section-header { margin-bottom: 56px; }
+  .section-header.center { text-align: center; }
+  .section-header.center .section-sub { margin: 0 auto; }
+
+  /* SERVICES */
+  .services { background: #f7f7fa; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .service-card {
+    background: #fff; border-radius: 8px; overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07); transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,0.13); border-bottom-color: #e8500a; }
+  .service-img { width: 100%; height: 200px; object-fit: cover; display: block; }
+  .service-body { padding: 24px; }
+  .service-icon { width: 44px; height: 44px; background: rgba(232,80,10,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  .service-body h3 { font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; color: #12121e; margin-bottom: 10px; letter-spacing: 0.5px; }
+  .service-body p { font-size: 0.9rem; color: #666; line-height: 1.6; }
+
+  /* WHY CHOOSE US */
+  .why { background: #12121e; }
+  .why .section-title { color: #fff; }
+  .why .section-sub { color: rgba(255,255,255,0.6); }
+  .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .why-card {
+    display: flex; gap: 20px; align-items: flex-start;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px; padding: 28px; transition: all 0.3s;
+  }
+  .why-card:hover { background: rgba(232,80,10,0.08); border-color: rgba(232,80,10,0.3); }
+  .why-icon { width: 52px; height: 52px; background: rgba(232,80,10,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .why-card h3 { font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600; color: #fff; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+  .why-card p { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  /* ABOUT */
+  .about { background: #fff; }
+  .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+  .about-img-wrap { position: relative; border-radius: 8px; overflow: hidden; }
+  .about-img-wrap img { width: 100%; height: 480px; object-fit: cover; display: block; border-radius: 8px; }
+  .about-badge {
+    position: absolute; bottom: 28px; left: 28px;
+    background: #e8500a; color: #fff; padding: 18px 24px; border-radius: 6px;
+    font-family: 'Oswald', sans-serif; text-align: center;
+  }
+  .about-badge .num { font-size: 2rem; font-weight: 700; line-height: 1; }
+  .about-badge .txt { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
+  .about-content .section-sub { margin-bottom: 28px; }
+  .about-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+  .about-list li { display: flex; align-items: center; gap: 12px; font-size: 0.95rem; color: #444; }
+  .about-list li svg { flex-shrink: 0; }
+
+  /* PHONE BANNER */
+  .phone-banner {
+    background: linear-gradient(135deg, #e8500a 0%, #c43d08 100%);
+    padding: 56px 5%; text-align: center;
+  }
+  .phone-banner h2 { font-family: 'Oswald', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.5rem); color: #fff; text-transform: uppercase; font-weight: 700; margin-bottom: 10px; }
+  .phone-banner p { color: rgba(255,255,255,0.85); font-size: 1rem; margin-bottom: 28px; }
+  .phone-big { display: inline-flex; align-items: center; gap: 14px; background: #fff; color: #e8500a; padding: 18px 40px; border-radius: 6px; text-decoration: none; font-family: 'Oswald', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; letter-spacing: 1px; transition: all 0.2s; box-shadow: 0 4px 24px rgba(0,0,0,0.2); }
+  .phone-big:hover { transform: scale(1.03); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+
+  /* SERVICE AREA */
+  .area { background: #f7f7fa; }
+  .area-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .area-map {
+    background: #12121e; border-radius: 8px; overflow: hidden;
+    position: relative; height: 400px; display: flex; align-items: center; justify-content: center;
+  }
+  .area-map iframe { width: 100%; height: 100%; border: none; filter: grayscale(0.3) contrast(1.1); }
+  .area-cities { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+  .city-tag {
+    display: flex; align-items: center; gap: 8px;
+    background: #fff; border: 1px solid #e0e0e0; padding: 10px 16px;
+    border-radius: 4px; font-size: 0.88rem; font-weight: 500; color: #333;
+    transition: all 0.2s;
+  }
+  .city-tag:hover { border-color: #e8500a; color: #e8500a; }
+  .city-tag svg { flex-shrink: 0; }
+
+  /* TESTIMONIALS */
+  .testimonials { background: #12121e; }
+  .testimonials .section-title { color: #fff; }
+  .testimonials .section-sub { color: rgba(255,255,255,0.6); }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .testi-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 28px; transition: all 0.3s;
+  }
+  .testi-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(232,80,10,0.3); }
+  .stars { display: flex; gap: 4px; margin-bottom: 16px; }
+  .testi-text { font-size: 0.92rem; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #e8500a, #c43d08); display: flex; align-items: center; justify-content: center; font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .testi-name { font-family: 'Oswald', sans-serif; font-size: 0.95rem; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
+  .testi-loc { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+
+  /* CONTACT */
+  .contact { background: #fff; }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; }
+  .contact-form { display: flex; flex-direction: column; gap: 18px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.82rem; font-weight: 600; color: #333; text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-group input, .form-group textarea, .form-group select {
+    padding: 13px 16px; border: 2px solid #e0e0e0; border-radius: 4px;
+    font-family: 'Work Sans', sans-serif; font-size: 0.95rem; color: #333;
+    transition: border-color 0.2s; outline: none; background: #fafafa;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: #e8500a; background: #fff; }
+  .form-group textarea { min-height: 130px; resize: vertical; }
+  .form-submit {
+    background: #e8500a; color: #fff; border: none; padding: 16px 36px;
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; border-radius: 4px;
+    cursor: pointer; transition: all 0.2s; align-self: flex-start;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .form-submit:hover { background: #c43d08; transform: translateY(-2px); }
+  .contact-info { display: flex; flex-direction: column; gap: 28px; }
+  .contact-info-card {
+    display: flex; gap: 18px; align-items: flex-start;
+    padding: 22px; background: #f7f7fa; border-radius: 8px; border-left: 4px solid #e8500a;
+  }
+  .contact-info-card h4 { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #12121e; margin-bottom: 6px; }
+  .contact-info-card p, .contact-info-card a { font-size: 0.95rem; color: #555; text-decoration: none; line-height: 1.5; }
+  .contact-info-card a:hover { color: #e8500a; }
+
+  /* FOOTER */
+  footer { background: #0d0d17; padding: 64px 5% 32px; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand p { font-size: 0.9rem; color: rgba(255,255,255,0.45); line-height: 1.7; margin: 16px 0 20px; max-width: 300px; }
+  .footer-phone { display: inline-flex; align-items: center; gap: 10px; color: #e8500a; font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600; text-decoration: none; }
+  .footer-phone:hover { color: #ff6b2b; }
+  .footer-col h4 { font-family: 'Oswald', sans-serif; font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #fff; margin-bottom: 18px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { font-size: 0.88rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: #e8500a; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom p { font-size: 0.82rem; color: rgba(255,255,255,0.3); }
+  .footer-bottom-right { display: flex; gap: 24px; }
+  .footer-bottom-right a { font-size: 0.82rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+  .footer-bottom-right a:hover { color: #e8500a; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+  }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .why-grid { grid-template-columns: 1fr; }
+    .about-inner { grid-template-columns: 1fr; gap: 40px; }
+    .about-img-wrap img { height: 340px; }
+    .area-inner { grid-template-columns: 1fr; gap: 36px; }
+    .testi-grid { grid-template-columns: 1fr 1fr; }
+    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-stats { flex-wrap: wrap; }
+    .stat { min-width: 50%; }
+  }
+  @media (max-width: 640px) {
+    section { padding: 72px 5%; }
+    .services-grid { grid-template-columns: 1fr; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .footer-bottom-right { flex-wrap: wrap; justify-content: center; }
+    .hero-stats { display: none; }
+    .area-cities { grid-template-columns: 1fr; }
+    .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="42" height="42" rx="8" fill="#e8500a"/>
+      <path d="M21 8C14 8 8 14 8 21s6 13 13 13 13-6 13-13S28 8 21 8zm0 22c-5 0-9-4-9-9s4-9 9-9 9 4 9 9-4 9-9 9z" fill="#fff" opacity="0.2"/>
+      <circle cx="21" cy="21" r="5" fill="#fff"/>
+      <path d="M21 10v4M21 28v4M10 21h4M28 21h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M14.5 14.5l2.8 2.8M24.7 24.7l2.8 2.8M14.5 27.5l2.8-2.8M24.7 17.3l2.8-2.8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <div class="nav-logo-text">The Cooling &amp;<br><span>&amp; Plumbing Co</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#area">Service Area</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Get A Quote</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#area" onclick="toggleMenu()">Service Area</a>
+  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+  <a href="#contact" onclick="toggleMenu()">Get A Quote</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#e8500a" stroke-width="1.5"/><path d="M7 3.5v3.5l2.5 1.5" stroke="#e8500a" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Mesa, Arizona's Trusted Experts
+    </div>
+    <h1>Expert Cooling<br>&amp; <span>Plumbing</span><br>Services</h1>
+    <p>Professional HVAC cooling systems and plumbing solutions for residential and commercial clients throughout Mesa and the greater Phoenix Valley area. Fast, reliable, and built to last.</p>
+    <div class="hero-actions">
+      <a href="tel:" class="btn-primary">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 2C3 2 2 3 2 4c0 8 6 14 14 14 1 0 2-1 2-2v-3c0-.5-.3-1-.8-1.2l-2.8-1.4c-.5-.2-1 0-1.3.4l-1 1.4C10 11 9 10 8.4 8.9L7 7.1c-.4-.3-.6-.8-.4-1.3L8 3c.2-.5 0-1-.4-1.3L4.8 2.2C4.6 2.1 4.3 2 4 2z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Call Now
+      </a>
+      <a href="#services" class="btn-secondary">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L10 14.5l-4.8 2.4.9-5.4-3.9-3.8 5.4-.8L10 2z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        Our Services
+      </a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">5.0</div>
+      <div class="stat-label">Star Rating</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Jobs Completed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Satisfaction</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header center">
+    <span class="section-label">What We Do</span>
+    <h2 class="section-title">Our <span>Expert</span> Services</h2>
+    <p class="section-sub">From AC repairs to full plumbing installations, we deliver professional results with quality parts and expert craftsmanship every time.</p>
+  </div>
+  <div class="services-grid">
+    <!-- Card 1 -->
+    <div class="service-card">
+      <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="AC Repair" class="service-img" loading="lazy">
+      <div class="service-body">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2v18M2 11h18M5.1 5.1l11.8 11.8M16.9 5.1L5.1 16.9" stroke="#e8500a" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="11" r="3" stroke="#e8500a" stroke-width="2"/></svg>
+        </div>
+        <h3>AC Repair &amp; Service</h3>
+        <p>Fast diagnosis and repair of all air conditioning systems. We handle refrigerant issues, compressor failures, electrical faults and more to restore your comfort quickly.</p>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="service-card">
+      <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=800&h=600&fit=crop" alt="HVAC Installation" class="service-img" loading="lazy">
+      <div class="service-body">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="6" width="18" height="10" rx="2" stroke="#e8500a" stroke-width="2"/><path d="M6 6V4M16 6V4M6 16v2M16 16v2" stroke="#e8500a" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="11" r="2" fill="#e8500a"/></svg>
+        </div>
+        <h3>HVAC Installation</h3>
+        <p>Professional installation of new heating and cooling systems tailored to your home or commercial space. Energy-efficient units matched perfectly to your needs.</p>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="service-card">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" alt="Plumbing" class="service-img" loading="lazy">
+      <div class="service-body">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M7 2C7 2 5 4 5 7c0 2.2 1.8 4 4 4s4-1.8 4-4" stroke="#e8500a" stroke-width="2" stroke-linecap="round"/><path d="M9 11v9M6 20h6" stroke="#e8500a" stroke-width="2" stroke-linecap="round"/><path d="M15 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-4" stroke="#e8500a" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Plumbing Services</h3>
+        <p>Complete plumbing solutions including leak repairs, pipe installation, fixture replacement, water heater service and drain cleaning for residential and commercial properties.</p>
+      </div>
+    </div>
+    <!-- Card 4 -->
+    <div class="service-card">
+      <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&h=800&fit=crop" alt="Preventive Maintenance" class="service-img" loading="lazy">
+      <div class="service-body">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2L3 7v5c0 5 4 9 9 9s9-4 9-9V7l-9-5z" stroke="#e8500a" stroke-width="2" stroke-linejoin="round"/><path d="M8 11l2 2 4-4" stroke="#e8500a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Preventive Maintenance</h3>
+        <p>Scheduled tune-ups and inspections keep your systems running at peak efficiency. Our maintenance plans help prevent costly breakdowns before they happen.</p>
+      </div>
+    </div>
+    <!-- Card 5 -->
+    <div class="service-card">
+      <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="Emergency Service" class="service-img" loading="lazy">
+      <div class="service-body">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L2 20h18L11 2z" stroke="#e8500a" stroke-width="2" stroke-linejoin="round"/><path d="M11 9v5M11 16.5v.5" stroke="#e8500a" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Emergency Repairs</h3>
+        <p>When cooling or plumbing emergencies strike in the Arizona heat, we respond fast. Prompt service when you need it most to minimize damage and restore comfort.</p>
+      </div>
+    </div>
+    <!-- Card 6 -->
+    <div class="service-card">
+      <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=800&h=600&fit=crop" alt="Water Heaters" class="service-img" loading="lazy">
+      <div class="service-body">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="6" y="2" width="10" height="16" rx="3" stroke="#e8500a" stroke-width="2"/><path d="M9 18v2M13 18v2M8 8h6" stroke="#e8500a" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="11" r="1.5" fill="#e8500a"/></svg>
+        </div>
+        <h3>Water Heater Service</h3>
+        <p>Installation, repair and replacement of traditional tank and tankless water heaters. We keep your hot water flowing reliably and efficiently throughout the year.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why" id="why">
+  <div class="section-header">
+    <span class="section-label">Why Choose Us</span>
+    <h2 class="section-title">The <span>Cooling &amp; Plumbing</span> Difference</h2>
+    <p class="section-sub">We're not just another service company. Here's what sets us apart from the competition in the Mesa area.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2L3 7v6c0 6.6 4.4 12.8 10 14 5.6-1.2 10-7.4 10-14V7L13 2z" stroke="#e8500a" stroke-width="2" stroke-linejoin="round"/><path d="M9 13l3 3 5-5" stroke="#e8500a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <h3>5-Star Rated Service</h3>
+        <p>Our reputation is built on consistent 5-star reviews from satisfied customers. We never cut corners and always deliver the quality workmanship you deserve.</p>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke="#e8500a" stroke-width="2"/><path d="M13 7v6l4 2" stroke="#e8500a" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <h3>Fast Response Times</h3>
+        <p>In the Arizona heat, every minute without cooling counts. We prioritize rapid response and aim to get to you the same day in most service situations.</p>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 3C7.5 3 3 7.5 3 13s4.5 10 10 10 10-4.5 10-10" stroke="#e8500a" stroke-width="2" stroke-linecap="round"/><path d="M17 3l4 4-4 4" stroke="#e8500a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 7h-6" stroke="#e8500a" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <h3>Transparent Pricing</h3>
+        <p>No hidden fees, no surprise charges. We provide upfront quotes before any work begins so you always know exactly what you're paying for.</p>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M8 12l-4 1 4 1v2l2-3-2-3v2zM18 12l4 1-4 1v2l-2-3 2-3v2z" stroke="#e8500a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="10" y="8" width="6" height="10" rx="1" stroke="#e8500a" stroke-width="2"/></svg>
+      </div>
+      <div>
+        <h3>Licensed &amp; Insured</h3>
+        <p>Fully licensed, bonded and insured for all plumbing and HVAC work in Arizona. Work with confidence knowing every job is covered and completed to code.</p>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L13 14.5l-4.8 2.4.9-5.4-3.9-3.8 5.4-.8L13 2z" stroke="#e8500a" stroke-width="2" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <h3>Quality Parts &amp; Materials</h3>
+        <p>We use only reputable, high-quality parts and materials. Every installation and repair is built to last so you get the best long-term value for your investment.</p>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M20 7H6a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2z" stroke="#e8500a" stroke-width="2"/><path d="M16 13H10M13 10v6" stroke="#e8500a" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <h3>Local Mesa Experts</h3>
+        <p>We know Mesa and the Phoenix Valley climate inside out. Our local expertise means better recommendations and solutions specifically suited to your environment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHONE BANNER -->
+<div class="phone-banner">
+  <h2>Ready To Get Started? Call Us Today</h2>
+  <p>Available for service calls throughout Mesa and the greater Phoenix Valley area</p>
+  <a href="tel:" class="phone-big">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M5.5 3C4.1 3 3 4.1 3 5.5c0 10.8 8.7 19.5 19.5 19.5C23.9 25 25 23.9 25 22.5v-4c0-.7-.4-1.3-1-1.6l-4-2.1c-.7-.3-1.5 0-1.9.5l-1.4 2C14 15.3 12.7 14 11 12.3l1.9-1.4c.6-.4.8-1.2.5-1.9l-2.1-4C11.1 4.4 10.5 4 9.8 4l-4-.3C5.8 3.7 5.7 3 5.5 3z" stroke="#e8500a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Call Now For Service
+  </a>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-img-wrap">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=800&fit=crop" alt="About The Cooling & Plumbing Co" loading="lazy">
+      <div class="about-badge">
+        <div class="num">5.0</div>
+        <div class="txt">Star Rated</div>
+      </div>
+    </div>
+    <div class="about-content">
+      <span class="section-label">About Us</span>
+      <h2 class="section-title">Mesa's Trusted <span>Cooling &amp; Plumbing</span> Professionals</h2>
+      <p class="section-sub">The Cooling &amp; Plumbing Co has been serving Mesa, Arizona and the surrounding communities with honest, reliable HVAC and plumbing services. We understand the unique demands of Arizona's extreme climate and deliver solutions that stand up to the heat.</p>
+      <ul class="about-list">
+        <li>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#e8500a"/><path d="M6 10l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Serving Mesa and surrounding Phoenix Valley cities
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#e8500a"/><path d="M6 10l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Expert technicians with extensive industry training
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#e8500a"/><path d="M6 10l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Residential and commercial service capabilities
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#e8500a"/><path d="M6 10l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Upfront pricing with no surprise charges
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#e8500a"/><path d="M6 10l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Satisfaction guaranteed on every service call
+        </li>
+      </ul>
+      <a href="#contact" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1l2.2 4.5 4.8.7-3.5 3.4.8 4.9L9 12.3l-4.3 2.2.8-4.9L2 6.2l4.8-.7L9 1z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        Get A Free Quote
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="area" id="area">
+  <div class="area-inner">
+    <div>
+      <span class="section-label">Where We Work</span>
+      <h2 class="section-title">Serving <span>Mesa &amp;</span> Surrounding Areas</h2>
+      <p class="section-sub">We proudly serve Mesa and the entire Phoenix East Valley with fast, professional cooling and plumbing services. Wherever you are, we'll get to you.</p>
+      <div class="area-cities">
+        <div class="city-tag">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3.3 4 8 4 8s4-4.7 4-8c0-2.2-1.8-4-4-4z" stroke="#e8500a" stroke-width="1.2"/><circle cx="7" cy="5" r="1.5" stroke="#e8500a" stroke-width="1.2"/></svg>
+          Mesa
+        </div>
+        <div class="city-tag">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3.3 4 8 4 8s4-4.7 4-8c0-2.2-1.8-4-4-4z" stroke="#e8500a" stroke-width="1.2"/><circle cx="7" cy="5" r="1.5" stroke="#e8500a" stroke-width="1.2"/></svg>
+          Phoenix
+        </div>
+        <div class="city-tag">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3.3 4 8 4 8s4-4.7 4-8c0-2.2-1.8-4-4-4z" stroke="#e8500a" stroke-width="1.2"/><circle cx="7" cy="5" r="1.5" stroke="#e8500a" stroke-width="1.2"/></svg>
+          Scottsdale
+        </div>
+        <div class="city-tag">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3.3 4 8 4 8s4-4.7 4-8c0-2.2-1.8-4-4-4z" stroke="#e8500a" stroke-width="1.2"/><circle cx="7" cy="5" r="1.5" stroke="#e8500a" stroke-width="1.2"/></svg>
+          Chandler
+        </div>
+        <div class="city-tag">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3.3 4 8 4 8s4-4.7 4-8c0-2.2-1.8-4-4-4z" stroke="#e8500a" stroke-width="1.2"/><circle cx="7" cy="5" r="1.5" stroke="#e8500a" stroke-width="1.2"/></svg>
+          Gilbert
+        </div>
+        <div class="city-tag">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3.3 4 8 4 8s4-4.7 4-8c0-2.2-1.8-4-4-4z" stroke="#e8500a" stroke-width="1.2"/><circle cx="7" cy="5" r="1.5" stroke="#e8500a" stroke-width="1.2"/></svg>
+          Tempe
+        </div>
+        <div class="city-tag">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3.3 4 8 4 8s4-4.7 4-8c0-2.2-1.8-4-4-4z" stroke="#e8500a" stroke-width="1.2"/><circle cx="7" cy="5" r="1.5" stroke="#e8500a" stroke-width="1.2"/></svg>
+          Ahwatukee
+        </div>
+        <div class="city-tag">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3.3 4 8 4 8s4-4.7 4-8c0-2.2-1.8-4-4-4z" stroke="#e8500a" stroke-width="1.2"/><circle cx="7" cy="5" r="1.5" stroke="#e8500a" stroke-width="1.2"/></svg>
+          Queen Creek
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="area-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26806.775!2d-111.7800!3d33.4152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872ba7b0082b1fa5%3A0xa4d9c2fbbf5a1c6b!2sMesa%2C%20AZ!5e0!3m2!1sen!2sus!4v1680000000000"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <div style="margin-top:16px; background:#fff; border:1px solid #e0e0e0; border-radius:8px; padding:16px; display:flex; align-items:flex-start; gap:14px;">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="flex-shrink:0; margin-top:2px;"><path d="M11 2C7.1 2 4 5.1 4 9c0 5.3 7 11 7 11s7-5.7 7-11c0-3.9-3.1-7-7-7z" stroke="#e8500a" stroke-width="2"/><circle cx="11" cy="9" r="2.5" stroke="#e8500a" stroke-width="2"/></svg>
+        <div>
+          <div style="font-family:'Oswald',sans-serif; font-size:0.95rem; font-weight:600; color:#12121e; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Our Location</div>
+          <div style="font-size:0.9rem; color:#555; line-height:1.5;">5026 E Main St UNIT 16<br>Mesa, AZ 85205, USA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-header center">
+    <span class="section-label">Customer Reviews</span>
+    <h2 class="section-title">What Our <span>Customers</span> Say</h2>
+    <p class="section-sub">Don't just take our word for it. Here's what real customers in Mesa and the Phoenix Valley have to say about our services.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="#e8500a"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4-3.6-1.9-3.6 1.9.7-4L2.2 5.2l4-.6L8 1z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="#e8500a"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4-3.6-1.9-3.6 1.9.7-4L2.2 5.2l4-.6L8 1z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="#e8500a"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4-3.6-1.9-3.6 1.9.7-4L2.2 5.2l4-.6L8 1z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="#e8500a"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4-3.6-1.9-3.6 1.9.7-4L2.2 5.2l4-.6L8 1z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="#e8500a"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4-3.6-1.9-3.6 1.9.7-4L2.2 5.2l4-.6L8 1z"/></svg>
+      </div>
+      <p class="testi-text">"Our AC went out in the middle of July and they came out same day. Fixed the issue quickly and the price was very fair. Couldn't be happier with the service. Will definitely call them again!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">MR</div>
+        <div>
+          <div class="testi-name">Michael R.</div>
+          <div class="testi-loc">Mesa, AZ</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="#e8500a"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4-3.6-1.9-3.6 1.9.7-4L2.2 5.2l4-.6L8 1z
