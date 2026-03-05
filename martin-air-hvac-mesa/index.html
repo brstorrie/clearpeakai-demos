@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Martin Air HVAC | Mesa, Arizona</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0d1b2a;
+    --navy-light: #1a2f46;
+    --silver: #c0c8d4;
+    --silver-light: #e8edf2;
+    --orange: #e8760a;
+    --orange-light: #f5942a;
+    --white: #ffffff;
+    --gray-100: #f4f6f9;
+    --gray-200: #e2e8f0;
+    --gray-600: #4a5568;
+    --gray-800: #2d3748;
+    --font-heading: 'Oswald', sans-serif;
+    --font-body: 'Work Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--gray-800); background: var(--white); overflow-x: hidden; }
+  
+  /* NAVBAR */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(13, 27, 42, 0.97);
+    backdrop-filter: blur(8px);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+    border-bottom: 3px solid var(--orange);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .logo-icon { width: 42px; height: 42px; }
+  .logo-text { display: flex; flex-direction: column; }
+  .logo-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .logo-sub {
+    font-size: 0.68rem; color: var(--orange);
+    letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 500;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-heading);
+    color: var(--silver-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange);
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--orange-light) !important; color: var(--white) !important; }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 4px;
+    background: none; border: none;
+  }
+  .hamburger span { width: 26px; height: 2px; background: var(--white); display: block; transition: 0.3s; }
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 72px; left: 0; right: 0;
+    background: var(--navy);
+    padding: 20px 5%;
+    border-top: 1px solid var(--orange);
+    z-index: 999;
+    flex-direction: column; gap: 4px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: var(--font-heading);
+    color: var(--silver-light);
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--orange); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&h=1080&fit=crop');
+    background-size: cover; background-position: center;
+    transform: scale(1.05);
+    transition: transform 8s ease-out;
+  }
+  .hero-bg.loaded { transform: scale(1); }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(110deg, rgba(13,27,42,0.93) 0%, rgba(13,27,42,0.75) 55%, rgba(13,27,42,0.4) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 120px 5% 80px;
+    max-width: 780px;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--orange);
+    color: var(--white);
+    padding: 7px 16px;
+    border-radius: 3px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.05;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .hero-title span { color: var(--orange); }
+  .hero-subtitle {
+    font-family: var(--font-heading);
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    color: var(--silver);
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero-desc {
+    font-size: 1.08rem;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.75;
+    max-width: 580px;
+    margin-bottom: 44px;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--orange);
+    color: var(--white);
+    padding: 16px 32px;
+    border-radius: 4px;
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(232,118,10,0.4);
+  }
+  .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,118,10,0.5); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent;
+    color: var(--white);
+    padding: 16px 32px;
+    border-radius: 4px;
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 2px solid rgba(255,255,255,0.5);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+  .hero-stats {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(13,27,42,0.9);
+    backdrop-filter: blur(6px);
+    border-top: 3px solid var(--orange);
+    display: flex;
+  }
+  .stat-item {
+    flex: 1;
+    padding: 22px 16px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--font-heading);
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--orange);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--silver);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* SECTION COMMONS */
+  section { padding: 90px 5%; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--orange);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 32px; height: 2px;
+    background: var(--orange);
+  }
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--gray-600);
+    line-height: 1.7;
+    max-width: 620px;
+    font-weight: 300;
+  }
+  .section-header { margin-bottom: 56px; }
+  .section-header.center { text-align: center; }
+  .section-header.center .section-label { justify-content: center; }
+  .section-header.center .section-label::before { display: none; }
+  .section-header.center .section-desc { margin: 0 auto; }
+
+  /* SERVICES */
+  .services { background: var(--gray-100); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .service-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(13,27,42,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-bottom: 3px solid transparent;
+  }
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(13,27,42,0.15);
+    border-bottom-color: var(--orange);
+  }
+  .service-img {
+    width: 100%; height: 200px; object-fit: cover;
+    display: block;
+    transition: transform 0.4s;
+  }
+  .service-card:hover .service-img { transform: scale(1.04); }
+  .service-img-wrap { overflow: hidden; }
+  .service-body { padding: 26px; }
+  .service-icon {
+    width: 44px; height: 44px;
+    background: var(--orange);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+  }
+  .service-name {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .service-desc {
+    font-size: 0.93rem;
+    color: var(--gray-600);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  .service-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 16px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--orange);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: gap 0.2s;
+  }
+  .service-link:hover { gap: 10px; }
+
+  /* WHY CHOOSE US */
+  .why { background: var(--navy); }
+  .why .section-title { color: var(--white); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .why-img-block { position: relative; }
+  .why-main-img {
+    width: 100%; border-radius: 8px;
+    object-fit: cover; height: 480px;
+    display: block;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  }
+  .why-badge-box {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    background: var(--orange);
+    color: var(--white);
+    padding: 22px 26px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(232,118,10,0.5);
+  }
+  .why-badge-num {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+  }
+  .why-badge-text {
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-top: 4px;
+  }
+  .why-features { display: flex; flex-direction: column; gap: 28px; }
+  .why-item {
+    display: flex; gap: 18px; align-items: flex-start;
+  }
+  .why-icon-box {
+    width: 52px; height: 52px; flex-shrink: 0;
+    background: rgba(232,118,10,0.12);
+    border: 2px solid rgba(232,118,10,0.3);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .why-item:hover .why-icon-box { background: var(--orange); border-color: var(--orange); }
+  .why-item-title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--white);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .why-item-desc {
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* ABOUT */
+  .about { background: var(--white); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .about-img-block { position: relative; }
+  .about-main-img {
+    width: 100%; border-radius: 8px;
+    height: 480px; object-fit: cover; object-position: top;
+    display: block;
+    box-shadow: 0 16px 48px rgba(13,27,42,0.15);
+  }
+  .about-accent {
+    position: absolute;
+    top: -16px; left: -16px;
+    width: 120px; height: 120px;
+    background: var(--orange);
+    border-radius: 8px;
+    z-index: -1;
+    opacity: 0.7;
+  }
+  .about-text-content { display: flex; flex-direction: column; gap: 22px; }
+  .about-lead {
+    font-size: 1.12rem;
+    color: var(--gray-800);
+    line-height: 1.75;
+    font-weight: 400;
+  }
+  .about-body {
+    font-size: 0.97rem;
+    color: var(--gray-600);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+  .about-creds {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 24px;
+    background: var(--gray-100);
+    border-radius: 8px;
+    border-left: 4px solid var(--orange);
+  }
+  .cred-item { display: flex; align-items: center; gap: 10px; }
+  .cred-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--orange); flex-shrink: 0;
+  }
+  .cred-text {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.3px;
+  }
+  .about-cta {
+    display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+    margin-top: 8px;
+  }
+
+  /* AREA */
+  .area { background: var(--gray-100); }
+  .area-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .area-map {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(13,27,42,0.12);
+    border: 3px solid var(--navy);
+  }
+  .area-map iframe { display: block; width: 100%; height: 380px; border: none; }
+  .area-info { display: flex; flex-direction: column; gap: 28px; }
+  .area-cities {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .city-tag {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--white);
+    padding: 12px 16px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(13,27,42,0.06);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--navy);
+    border-left: 3px solid var(--orange);
+  }
+  .area-address {
+    background: var(--navy);
+    padding: 22px 26px;
+    border-radius: 8px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .area-address-text { flex: 1; }
+  .area-address-title {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: var(--orange);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .area-address-val {
+    font-size: 0.95rem;
+    color: var(--white);
+    line-height: 1.5;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--white); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .test-card {
+    background: var(--gray-100);
+    border-radius: 8px;
+    padding: 30px;
+    border-top: 4px solid var(--orange);
+    box-shadow: 0 2px 12px rgba(13,27,42,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .test-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(13,27,42,0.12); }
+  .test-quote {
+    position: absolute;
+    top: 20px; right: 24px;
+    opacity: 0.08;
+  }
+  .stars { display: flex; gap: 4px; margin-bottom: 16px; }
+  .star { color: #f59e0b; }
+  .test-text {
+    font-size: 0.95rem;
+    color: var(--gray-600);
+    line-height: 1.7;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 22px;
+  }
+  .test-author { display: flex; align-items: center; gap: 14px; }
+  .test-avatar {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+  .test-name {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .test-loc {
+    font-size: 0.8rem;
+    color: var(--gray-600);
+    font-weight: 400;
+  }
+
+  /* CONTACT */
+  .contact { background: var(--navy); }
+  .contact .section-title { color: var(--white); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 32px; }
+  .contact-intro {
+    font-size: 1.02rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+  .contact-items { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .contact-icon-box {
+    width: 46px; height: 46px;
+    background: rgba(232,118,10,0.15);
+    border: 1px solid rgba(232,118,10,0.3);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-item-label {
+    font-size: 0.72rem;
+    color: var(--orange);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .contact-item-val {
+    font-size: 0.98rem;
+    color: var(--white);
+    font-weight: 400;
+    text-decoration: none;
+  }
+  .contact-item-val:hover { color: var(--orange); }
+  .contact-form {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 40px;
+  }
+  .form-title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 5px;
+    padding: 12px 16px;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--orange);
+    background: rgba(255,255,255,0.09);
+  }
+  .form-group select { cursor: pointer; }
+  .form-group select option { background: var(--navy); }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    margin-top: 8px;
+  }
+  .form-submit:hover { background: var(--orange-light); transform: translateY(-1px); }
+  .mb-16 { margin-bottom: 16px; }
+
+  /* FOOTER */
+  .footer {
+    background: #060d14;
+    border-top: 3px solid var(--orange);
+    padding: 60px 5% 30px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  .footer-brand .logo-title { font-size: 1.4rem; }
+  .footer-tagline {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.65;
+    margin-top: 16px;
+    font-weight: 300;
+  }
+  .footer-col-title {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: var(--orange);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .footer-links { display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 300;
+  }
+  .footer-links a:hover { color: var(--orange); }
+  .footer-contact-items { display: flex; flex-direction: column; gap: 14px; }
+  .footer-contact-item {
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .footer-contact-item-text {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+    font-weight: 300;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-contact-item-text:hover { color: var(--orange); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-copy {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.3);
+    font-weight: 300;
+  }
+  .footer-bottom-links {
+    display: flex; gap: 24px;
+  }
+  .footer-bottom-links a {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-bottom-links a:hover { color: var(--orange); }
+
+  /* PHONE CTA STRIP */
+  .cta-strip {
+    background: var(--orange);
+    padding: 22px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .cta-strip-text {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--white);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .cta-strip-phone {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--white);
+    color: var(--orange);
+    padding: 13px 28px;
+    border-radius: 4px;
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cta-strip-phone:hover { background: var(--navy); color: var(--white); }
+
+  /* SCROLL TOP */
+  .scroll-top {
+    position: fixed; bottom: 28px; right: 24px;
+    width: 46px; height: 46px;
+    background: var(--orange);
+    border: none; border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(232,118,10,0.5);
+    transition: background 0.2s, transform 0.2s;
+    z-index: 500;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .scroll-top.visible { opacity: 1; pointer-events: all; }
+  .scroll-top:hover { background: var(--navy); transform: translateY(-2px); }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .why-grid { grid-template-columns: 1fr; gap: 48px; }
+    .why-img-block { display: none; }
+    .about-grid { gap: 40px; }
+    .contact-grid { gap: 40px; }
+    .area-grid { gap: 40px; }
+  }
+  @media (max-width: 768px) {
+    section { padding: 64px 5%; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .services-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-img-block { display: none; }
+    .area-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; }
+    .stat-item { min-width: 50%; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .about-creds { grid-template-columns: 1fr; }
+    .area-cities { grid-template-columns: 1fr; }
+    .why-features { gap: 20px; }
+    .cta-strip { justify-content: center; text-align: center; }
+    .contact-form { padding: 28px 20px; }
+  }
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .hero-actions { flex-direction: column; }
+    .btn-primary, .btn-secondary { justify-content: center; text-align: center; }
+    .about-cta { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="logo">
+    <svg class="logo-icon" viewBox="0 0 42 42" fill="none">
+      <rect width="42" height="42" rx="6" fill="#e8760a"/>
+      <path d="M21 8C14 8 8 14 8 21s6 13 13 13 13-6 13-13S28 8 21 8zm0 3c2.2 0 4.2.7 5.9 1.9L11.9 26.9C10.7 25.2 10 23.2 10 21c0-6.1 4.9-11 11-11zm0 22c-2.2 0-4.2-.7-5.9-1.9l15-15c1.2 1.7 1.9 3.7 1.9 5.9 0 6.1-4.9 11-11 11z" fill="white"/>
+      <path d="M21 14v4l3 3-3 3v4l6-7-6-7z" fill="white" opacity="0.6"/>
+    </svg>
+    <div class="logo-text">
+      <span class="logo-title">Martin Air HVAC</span>
+      <span class="logo-sub">Mesa, Arizona</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#area">Service Area</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services">Services</a>
+  <a href="#about">About</a>
+  <a href="#area">Service Area</a>
+  <a href="#testimonials">Reviews</a>
+  <a href="#contact">Get a Quote</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      5-Star Rated HVAC Services
+    </div>
+    <h1 class="hero-title">Mesa's Trusted<br><span>HVAC Experts</span></h1>
+    <p class="hero-subtitle">Comfort You Can Count On</p>
+    <p class="hero-desc">Professional heating, ventilation, and air conditioning services for residential and commercial properties across Mesa and the greater Phoenix area. Fast, reliable, and built to last.</p>
+    <div class="hero-actions">
+      <a href="tel:" class="btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.5 10.8 19.79 19.79 0 01.46 2.18 2 2 0 012.44 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l.77-.78a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        Call Now — Free Quote
+      </a>
+      <a href="#services" class="btn-secondary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        View Services
+      </a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">15+</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">2,400+</span>
+      <span class="stat-label">Systems Serviced</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">5.0</span>
+      <span class="stat-label">Star Rating</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">Same Day</span>
+      <span class="stat-label">Service Available</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header center">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">Complete HVAC Solutions</h2>
+    <p class="section-desc">From emergency repairs to full system installations, Martin Air HVAC delivers expert service that keeps your home or business comfortable year-round.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="AC Installation" class="service-img" loading="lazy">
+      </div>
+      <div class="service-body">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg>
+        </div>
+        <h3 class="service-name">AC Installation</h3>
+        <p class="service-desc">New system installation and full replacements using premium, energy-efficient equipment matched to your space and budget for maximum Arizona comfort.</p>
+        <a href="#contact" class="service-link">Get a Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=800&h=600&fit=crop" alt="AC Repair" class="service-img" loading="lazy">
+      </div>
+      <div class="service-body">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3 class="service-name">AC Repair</h3>
+        <p class="service-desc">Fast, accurate diagnostics and repairs for all makes and models. We restore cooling quickly, especially critical during Arizona's intense summer heat.</p>
+        <a href="#contact" class="service-link">Get a Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" alt="Heating Services" class="service-img" loading="lazy">
+      </div>
+      <div class="service-body">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 007-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 007 7z"/></svg>
+        </div>
+        <h3 class="service-name">Heating Systems</h3>
+        <p class="service-desc">Complete furnace and heat pump installation, repair, and maintenance. Stay warm and efficient during cooler Arizona months with expertly calibrated heating.</p>
+        <a href="#contact" class="service-link">Get a Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&h=800&fit=crop" alt="Preventive Maintenance" class="service-img" loading="lazy">
+      </div>
+      <div class="service-body">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="service-name">Preventive Maintenance</h3>
+        <p class="service-desc">Scheduled tune-ups and inspections that extend equipment life, improve efficiency, and catch small issues before they become costly emergency repairs.</p>
+        <a href="#contact" class="service-link">Get a Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="Indoor Air Quality" class="service-img" loading="lazy">
+      </div>
+      <div class="service-body">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 19.25A1 1 0 004.63 21C8 20 12 19 15 21"/><path d="M17 8l2-2"/><path d="M8 10l1-3"/><path d="M12 8V5"/></svg>
+        </div>
+        <h3 class="service-name">Indoor Air Quality</h3>
+        <p class="service-desc">Air purification, filtration upgrades, humidity control, and duct cleaning to ensure the air you breathe inside your home is clean and healthy.</p>
+        <a href="#contact" class="service-link">Get a Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=800&h=600&fit=crop" alt="Commercial HVAC" class="service-img" loading="lazy">
+      </div>
+      <div class="service-body">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        </div>
+        <h3 class="service-name">Commercial HVAC</h3>
+        <p class="service-desc">Full-service commercial heating and cooling solutions for offices, retail, restaurants, and industrial facilities throughout the Mesa area.</p>
+        <a href="#contact" class="service-link">Get a Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <span class="cta-strip-text">Arizona Summer is brutal. Don't wait until your AC fails — call us today for a free system inspection.</span>
+  <a href="tel:" class="cta-strip-phone">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.5 10.8 19.79 19.79 0 01.46 2.18 2 2 0 012.44 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l.77-.78a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+    Call Martin Air HVAC
+  </a>
+</div>
+
+<!-- WHY CHOOSE US -->
+<section class="why" id="why">
+  <div class="why-grid">
+    <div class="why-img-block">
+      <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&h=800&fit=crop" alt="HVAC Technician" class="why-main-img" loading="lazy">
+      <div class="why-badge-box">
+        <span class="why-badge-num">5.0</span>
+        <span class="why-badge-text">Star Rating</span>
+      </div>
+    </div>
+    <div>
+      <div class="section-label" style="color: var(--orange);">Why Choose Us</div>
+      <h2 class="section-title" style="color: white; margin-bottom: 36px;">The Martin Air HVAC<br>Difference</h2>
+      <div class="why-features">
+
+        <div class="why-item">
+          <div class="why-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8760a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="why-item-title">Same-Day Service Available</div>
+            <div class="why-item-desc">We understand Arizona heat is an emergency. Our team responds fast and gets your system running the same day you call, whenever possible.</div>
+          </div>
+        </div>
+
+        <div class="why-item">
+          <div class="why-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8760a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="why-item-title">Licensed & Fully Insured</div>
+            <div class="why-item-desc">Every technician is licensed, background-checked, and fully insured. We carry all required Arizona state contractor certifications for your peace of mind.</div>
+          </div>
+        </div>
+
+        <div class="why-item">
+          <div class="why-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8760a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <div>
+            <div class="why-item-title">Upfront, Honest Pricing</div>
+            <div class="why-item-desc">No hidden fees. No surprise charges. We provide detailed estimates before any work begins so you always know exactly what you're paying and why.</div>
+          </div>
+        </div>
+
+        <div class="why-item">
+          <div class="why-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8760a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div class="why-item-title">Workmanship Guarantee</div>
+            <div class="why-item-desc">Every repair and installation is backed by our satisfaction guarantee. If something isn't right, we'll make it right — no questions asked.</div>
+          </div>
+        </div>
+
+        <div class="why-item">
+          <div class="why-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8760a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div>
+            <div class="why-item-title">Local Mesa Experts</div>
+            <div class="why-item-desc">We're your neighbors. We know Mesa's climate, homes, and commercial buildings inside and out. Supporting local means faster service and better results.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-img-block">
+      <div class="about-accent"></div>
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=800&fit=crop" alt="Martin Air HVAC Owner" class="about-main-img" loading="lazy">
+    </div>
+    <div class="about-text-content">
+      <div class="section-label">Our Story</div>
+      <h2 class="section-title">About Martin Air HVAC</h2>
+      <p class="about-lead">Founded in Mesa, Arizona, Martin Air HVAC has been delivering reliable, professional HVAC services to homeowners and businesses across the Valley for over 15 years.</p>
+      <p class="about-body">We built our reputation on honesty, technical excellence, and genuine care for our customers. When temperatures in Mesa climb past 110°F, we know that a working HVAC system isn't a luxury — it's a necessity. That's why we treat every call with urgency and every customer like family.</p>
+      <p class="about-body">Our team of certified technicians stays current with the latest HVAC technology and energy efficiency standards. Whether you need a quick repair or a full system upgrade, you'll get the same level of professional service that's earned us a perfect 5-star rating across every platform.</p>
+      <div class="about-creds">
+        <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">EPA 608 Certified</span></div>
+        <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">AZ State Licensed</span></div>
+        <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">NATE Certified Techs</span></div>
+        <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">Fully Bonded & Insured</span></div>
+        <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">Energy Star Partner</span></div>
+        <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">BBB Accredited</span></div>
+      </div>
+      <div class="about-cta">
+        <a href="tel:" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill
