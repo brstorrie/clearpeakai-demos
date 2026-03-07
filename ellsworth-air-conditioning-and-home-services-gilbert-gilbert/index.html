@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ellsworth Air Conditioning and Home Services - Gilbert, AZ</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Work Sans', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
+  h1, h2, h3, h4, h5 { font-family: 'Oswald', sans-serif; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(15, 20, 40, 0.97);
+    backdrop-filter: blur(10px);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+    border-bottom: 2px solid #e85d04;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+  .nav-logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    line-height: 1.2;
+  }
+  .nav-logo span { color: #e85d04; }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: #e85d04; }
+  .nav-cta {
+    background: #e85d04;
+    color: #fff !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    transition: background 0.3s !important;
+  }
+  .nav-cta:hover { background: #c44d03 !important; color: #fff !important; }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 5px;
+  }
+  .hamburger span {
+    display: block; width: 25px; height: 3px;
+    background: #fff; border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px; left: 0; right: 0;
+    background: rgba(15, 20, 40, 0.99);
+    padding: 1.5rem 2rem;
+    z-index: 999;
+    border-bottom: 2px solid #e85d04;
+  }
+  .mobile-menu.open { display: block; }
+  .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .mobile-menu a {
+    color: #ccc; text-decoration: none;
+    font-size: 1rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    display: block; padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .mobile-menu a:hover { color: #e85d04; }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&h=1080&fit=crop') center/cover no-repeat;
+    padding-top: 70px;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(10,15,35,0.92) 0%, rgba(10,15,35,0.75) 60%, rgba(232,93,4,0.15) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    padding: 2rem;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(232,93,4,0.15);
+    border: 1px solid #e85d04;
+    color: #e85d04;
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+  }
+  .hero h1 span { color: #e85d04; }
+  .hero p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: #c8d0e0;
+    max-width: 650px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .hero-btns {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: #e85d04;
+    color: #fff;
+    padding: 1rem 2.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(232,93,4,0.4);
+  }
+  .btn-primary:hover {
+    background: #c44d03;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(232,93,4,0.5);
+  }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: transparent;
+    color: #fff;
+    padding: 1rem 2.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 2px solid rgba(255,255,255,0.5);
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover {
+    border-color: #fff;
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+  }
+  .hero-stats {
+    position: relative; z-index: 2;
+    display: flex; justify-content: center; gap: 3rem;
+    padding: 2rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #e85d04;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    color: #8090a0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+
+  /* SECTION COMMONS */
+  section { padding: 6rem 2rem; }
+  .section-header { text-align: center; margin-bottom: 4rem; }
+  .section-tag {
+    display: inline-block;
+    background: rgba(232,93,4,0.1);
+    color: #e85d04;
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(232,93,4,0.3);
+  }
+  .section-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #0f1428;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .section-header h2 span { color: #e85d04; }
+  .section-header p {
+    font-size: 1.05rem;
+    color: #5a6a7a;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .divider {
+    width: 60px; height: 4px;
+    background: linear-gradient(90deg, #e85d04, #ff8c42);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  /* PHONE BAR */
+  .phone-bar {
+    background: linear-gradient(135deg, #e85d04 0%, #c44d03 100%);
+    padding: 1.2rem 2rem;
+    text-align: center;
+  }
+  .phone-bar-inner {
+    display: flex; align-items: center; justify-content: center;
+    gap: 2rem; flex-wrap: wrap;
+  }
+  .phone-bar p {
+    color: rgba(255,255,255,0.9);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  .phone-bar-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: 2px solid rgba(255,255,255,0.5);
+    transition: all 0.3s;
+  }
+  .phone-bar-link:hover {
+    background: rgba(255,255,255,0.3);
+    border-color: #fff;
+  }
+
+  /* SERVICES */
+  #services { background: #f8f9fc; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .service-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.4s;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(232,93,4,0.2);
+    border-color: rgba(232,93,4,0.3);
+  }
+  .service-img {
+    width: 100%; height: 200px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s;
+  }
+  .service-card:hover .service-img { transform: scale(1.05); }
+  .service-img-wrap { overflow: hidden; position: relative; }
+  .service-icon-badge {
+    position: absolute; bottom: -20px; right: 20px;
+    width: 50px; height: 50px;
+    background: #e85d04;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 15px rgba(232,93,4,0.4);
+  }
+  .service-body { padding: 2rem 1.5rem 1.5rem; }
+  .service-body h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #0f1428;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.5px;
+  }
+  .service-body p {
+    font-size: 0.92rem;
+    color: #5a6a7a;
+    line-height: 1.65;
+    margin-bottom: 1.2rem;
+  }
+  .service-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    color: #e85d04;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: gap 0.3s;
+  }
+  .service-link:hover { gap: 0.8rem; }
+
+  /* WHY CHOOSE US */
+  #why { background: #0f1428; }
+  #why .section-header h2 { color: #fff; }
+  #why .section-header p { color: #8090a0; }
+  #why .section-tag { background: rgba(232,93,4,0.2); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .why-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .why-card:hover {
+    background: rgba(232,93,4,0.08);
+    border-color: rgba(232,93,4,0.3);
+    transform: translateY(-5px);
+  }
+  .why-icon {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, rgba(232,93,4,0.2), rgba(232,93,4,0.1));
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+    border: 1px solid rgba(232,93,4,0.3);
+  }
+  .why-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.5px;
+  }
+  .why-card p {
+    font-size: 0.9rem;
+    color: #8090a0;
+    line-height: 1.65;
+  }
+
+  /* ABOUT */
+  #about { background: #fff; }
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .about-img-wrap { position: relative; }
+  .about-img {
+    width: 100%; border-radius: 16px;
+    object-fit: cover; height: 500px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+  .about-badge {
+    position: absolute;
+    bottom: -20px; left: -20px;
+    background: #e85d04;
+    color: #fff;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    font-family: 'Oswald', sans-serif;
+    box-shadow: 0 8px 30px rgba(232,93,4,0.4);
+  }
+  .about-badge-num {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+  }
+  .about-badge-text {
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: 0.9;
+    display: block;
+    margin-top: 0.3rem;
+  }
+  .about-content .section-header { text-align: left; }
+  .about-content .divider { margin: 1rem 0 0; }
+  .about-content p {
+    font-size: 1rem;
+    color: #5a6a7a;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .about-features {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+  .about-features li {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.92rem;
+    color: #2a3a4a;
+    font-weight: 500;
+  }
+  .check-icon { flex-shrink: 0; }
+
+  /* SERVICE AREA */
+  #area { background: #f8f9fc; }
+  .area-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .area-map {
+    background: #0f1428;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 400px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  }
+  .area-map iframe {
+    width: 100%; height: 100%;
+    border: none; filter: grayscale(20%);
+  }
+  .area-map-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #0f1428 0%, #1a2444 100%);
+    color: #fff;
+    text-align: center;
+    padding: 2rem;
+  }
+  .area-map-placeholder h3 {
+    font-size: 1.5rem;
+    color: #e85d04;
+    margin-bottom: 0.5rem;
+  }
+  .area-map-placeholder p { color: #8090a0; font-size: 0.95rem; }
+  .area-content .section-header { text-align: left; }
+  .area-content .divider { margin: 1rem 0 2rem; }
+  .area-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+  .area-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.95rem;
+    color: #2a3a4a;
+    font-weight: 500;
+    padding: 0.6rem 1rem;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e8edf5;
+    transition: all 0.3s;
+  }
+  .area-item:hover {
+    border-color: #e85d04;
+    color: #e85d04;
+    background: rgba(232,93,4,0.05);
+  }
+  .area-cta {
+    background: #e85d04;
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(232,93,4,0.3);
+  }
+  .area-cta:hover {
+    background: #c44d03;
+    transform: translateY(-2px);
+  }
+
+  /* TESTIMONIALS */
+  #testimonials { background: #0f1428; }
+  #testimonials .section-header h2 { color: #fff; }
+  #testimonials .section-header p { color: #8090a0; }
+  #testimonials .section-tag { background: rgba(232,93,4,0.2); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .testimonial-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .testimonial-card:hover {
+    border-color: rgba(232,93,4,0.3);
+    background: rgba(232,93,4,0.05);
+    transform: translateY(-5px);
+  }
+  .quote-icon {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    opacity: 0.15;
+  }
+  .stars {
+    display: flex; gap: 3px; margin-bottom: 1rem;
+  }
+  .star { fill: #e85d04; }
+  .testimonial-text {
+    font-size: 0.95rem;
+    color: #a0b0c0;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+  .testimonial-author {
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .author-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e85d04, #c44d03);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .author-name {
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.95rem;
+  }
+  .author-location {
+    font-size: 0.82rem;
+    color: #6070a0;
+    margin-top: 0.2rem;
+  }
+  .rating-bar {
+    background: linear-gradient(135deg, #e85d04, #c44d03);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .rating-bar-inner {
+    max-width: 600px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: center; gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .rating-big {
+    font-family: 'Oswald', sans-serif;
+    font-size: 5rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+  .rating-detail { text-align: left; }
+  .rating-detail .stars { margin-bottom: 0.3rem; }
+  .rating-detail p { color: rgba(255,255,255,0.85); font-size: 0.95rem; }
+  .rating-detail strong { color: #fff; }
+
+  /* CONTACT */
+  #contact { background: #fff; }
+  .contact-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contact-info h3 {
+    font-size: 1.5rem;
+    color: #0f1428;
+    margin-bottom: 2rem;
+  }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    margin-bottom: 1.8rem;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid #f0f4f8;
+  }
+  .contact-item:last-child { border-bottom: none; }
+  .contact-icon-wrap {
+    width: 50px; height: 50px;
+    background: rgba(232,93,4,0.1);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid rgba(232,93,4,0.2);
+  }
+  .contact-item-content h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #8090a0;
+    font-weight: 600;
+    font-family: 'Work Sans', sans-serif;
+    margin-bottom: 0.3rem;
+  }
+  .contact-item-content a, .contact-item-content p {
+    font-size: 1.05rem;
+    color: #0f1428;
+    text-decoration: none;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  .contact-item-content a { color: #e85d04; }
+  .contact-item-content a:hover { text-decoration: underline; }
+  .contact-form-wrap {
+    background: #f8f9fc;
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid #e8edf5;
+  }
+  .contact-form-wrap h3 {
+    font-size: 1.5rem;
+    color: #0f1428;
+    margin-bottom: 1.5rem;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #3a4a5a;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 2px solid #e8edf5;
+    border-radius: 8px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.95rem;
+    color: #0f1428;
+    background: #fff;
+    transition: border-color 0.3s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: #e85d04;
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-submit {
+    width: 100%;
+    background: #e85d04;
+    color: #fff;
+    border: none;
+    padding: 1.1rem;
+    border-radius: 8px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+    box-shadow: 0 4px 15px rgba(232,93,4,0.3);
+  }
+  .form-submit:hover {
+    background: #c44d03;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(232,93,4,0.4);
+  }
+
+  /* GALLERY STRIP */
+  .gallery-strip {
+    padding: 4rem 2rem;
+    background: #f8f9fc;
+  }
+  .gallery-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .gallery-item {
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    position: relative;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+  .gallery-item:hover img { transform: scale(1.08); }
+  .gallery-item-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(232,93,4,0.7) 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+  /* FOOTER */
+  footer {
+    background: #07091a;
+    padding: 4rem 2rem 2rem;
+  }
+  .footer-top {
+    max-width: 1200px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 2rem;
+  }
+  .footer-brand p {
+    font-size: 0.9rem;
+    color: #6070a0;
+    line-height: 1.7;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .footer-social {
+    display: flex; gap: 0.8rem;
+  }
+  .social-link {
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .social-link:hover {
+    background: #e85d04;
+    border-color: #e85d04;
+  }
+  .footer-col h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.7rem; }
+  .footer-links a {
+    color: #6070a0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .footer-links a:hover { color: #e85d04; }
+  .footer-contact-item {
+    display: flex; align-items: flex-start; gap: 0.6rem;
+    margin-bottom: 0.8rem;
+  }
+  .footer-contact-item p, .footer-contact-item a {
+    font-size: 0.88rem;
+    color: #6070a0;
+    text-decoration: none;
+    line-height: 1.5;
+  }
+  .footer-contact-item a:hover { color: #e85d04; }
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p {
+    font-size: 0.85rem;
+    color: #4050a0;
+  }
+  .footer-bottom-links {
+    display: flex; gap: 1.5rem; list-style: none;
+  }
+  .footer-bottom-links a {
+    font-size: 0.85rem;
+    color: #4050a0;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-bottom-links a:hover { color: #e85d04; }
+
+  /* STICKY CTA */
+  .sticky-cta {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    z-index: 500;
+    display: flex; flex-direction: column; gap: 0.8rem;
+  }
+  .sticky-btn {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    transition: all 0.3s;
+  }
+  .sticky-btn:hover { transform: scale(1.1); }
+  .sticky-call { background: #e85d04; }
+  .sticky-map { background: #0f1428; border: 2px solid rgba(255,255,255,0.2); }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .about-badge { bottom: -15px; left: -10px; }
+    .gallery-inner { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 1.2rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero h1 { font-size: 2.2rem; }
+    .services-grid { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
+    .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .about-img { height: 350px; }
+    .about-badge { bottom: -15px; left: 10px; }
+    .area-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .area-list { grid-template-columns: 1fr 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .hero-stats { gap: 1.5rem; }
+    section { padding: 4rem 1.2rem; }
+    .about-features { grid-template-columns: 1fr; }
+    .gallery-inner { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .hero-btns { flex-direction: column; align-items: center; }
+    .why-grid { grid-template-columns: 1fr; }
+    .area-list { grid-template-columns: 1fr; }
+    .footer-social { flex-wrap: wrap; }
+    .hero-stats { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .gallery-inner { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-logo">Ellsworth <span>AC</span><br>& Home Services</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#area">Service Area</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+    <li><a href="#why" onclick="toggleMenu()">Why Us</a></li>
+    <li><a href="#about" onclick="toggleMenu()">About</a></li>
+    <li><a href="#area" onclick="toggleMenu()">Service Area</a></li>
+    <li><a href="#testimonials" onclick="toggleMenu()">Reviews</a></li>
+    <li><a href="#contact" onclick="toggleMenu()">Get a Quote</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-overlay"></div>
+  <div style="position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:2rem;">
+    <div class="hero-content" style="margin:0 auto;">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#e85d04"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        4.8 Star Rated in Gilbert, AZ
+      </div>
+      <h1>Gilbert's Premier <span>Air Conditioning</span> &amp; Home Services</h1>
+      <p>Professional HVAC installation, repair, and maintenance for Gilbert and surrounding communities. Keeping your home comfortable year-round in the Arizona heat.</p>
+      <div class="hero-btns">
+        <a href="tel:" class="btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 014 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Call Now — Free Estimate
+        </a>
+        <a href="#services" class="btn-secondary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Explore Services
+        </a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">15+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">5,000+</span>
+        <span class="stat-label">Homes Served</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">4.8</span>
+        <span class="stat-label">Star Rating</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">24/7</span>
+        <span class="stat-label">Emergency Service</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHONE BAR -->
+<div class="phone-bar">
+  <div class="phone-bar-inner">
+    <p>Arizona's summer heat doesn't wait — neither should you. Call for same-day service.</p>
+    <a href="tel:" class="phone-bar-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 014 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Call Now — Free Estimate
+    </a>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header">
+    <span class="section-tag">What We Do</span>
+    <h2>Comprehensive <span>Home Services</span></h2>
+    <p>From emergency AC repair to full system installation, we handle every aspect of your home's comfort and maintenance needs.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="services-grid">
+
+    <!-- Card 1 -->
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="AC Repair" class="service-img" loading="lazy">
+        <div class="service-icon-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 16v6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M16 12h6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg>
+        </div>
+      </div>
+      <div class="service-body">
+        <h3>AC Repair &amp; Diagnostics</h3>
+        <p>Fast, reliable air conditioning repair services. Our certified technicians diagnose and fix all makes and models, getting your system back up and running quickly.</p>
+        <a href="#contact" class="service-link">
+          Schedule Repair
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e85d04" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=800&h=600&fit=crop" alt="AC Installation" class="service-img" loading="lazy">
+        <div class="service-icon-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+      </div>
+      <div class="service-body">
+        <h3>New AC Installation</h3>
+        <p>Expert installation of high-efficiency air conditioning systems. We help you select the right unit for your home's size and budget, ensuring maximum comfort and energy savings.</p>
+        <a href="#contact" class="service-link">
+          Get Installation Quote
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e85d04" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" alt="HVAC Maintenance" class="service-img" loading="lazy">
+        <div class="service-icon-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+      </div>
+      <div class="service-body">
+        <h3>Preventive Maintenance</h3>
+        <p>Regular tune-ups and maintenance plans to keep your AC running at peak efficiency. Prevent costly breakdowns with our comprehensive seasonal service programs.</p>
+        <a href="#contact" class="service-link">
+          View Plans
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e85d04" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&h=600&fit=crop" alt="Heating Services" class="service-img" loading="lazy">
+        <div class="service-icon-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 007-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 007 7z"/></svg>
+        </div>
+      </div>
+      <div class="service-body">
+        <h3>Heating System Service</h3>
+        <p>Complete heating installation, repair, and maintenance services. From heat pumps to furnaces, we ensure your home stays warm during Arizona's cooler months.</p>
+        <a href="#contact" class="service-link">
+          Book Service
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e85d04" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="Indoor Air Quality" class="service-img" loading="lazy">
+        <div class="service-icon-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1011 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"/></svg>
+        </div>
+      </div>
+      <div class="service-body">
+        <h3>Indoor Air Quality</h3>
+        <p>Improve the air you breathe with our advanced filtration, UV purification, and dehumidification solutions. Ideal for families with allergies or respiratory concerns.</p>
+        <a href="#contact" class="service-link">
+          Learn More
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e85d04" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" alt="Emergency Service" class="service-img" loading="lazy">
+        <div class="service-icon-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+      </div>
+      <div class="service-body">
+        <h3>24/7 Emergency Service</h3>
+        <p>AC breakdowns don't follow a schedule. Our emergency response team is available around the clock to restore your comfort as quickly as possible, day or night.</p>
+        <a href="tel:" class="service-link">
+          Call Emergency Line
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e85d04" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section id="why">
+  <div class="section-header">
+    <span class="section-tag">Our Advantage</span>
+    <h2>Why Gilbert Homeowners <span>Choose Ellsworth</span></h2>
+    <p>We've built our reputation on trust, quality workmanship, and exceptional customer service across the East Valley.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e85d04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Licensed &amp; Insured</h3>
+      <p>Fully licensed, bonded, and insured technicians. You can trust that every job meets Arizona state standards and is fully covered for your peace of mind.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e85d04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3>Same-Day Service</h3>
+      <p>We understand Arizona heat is no joke. That's why we prioritize same-day appointments and rapid response times to get your AC working again fast.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e85d04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <h3>Upfront Pricing</h3>
+      <p>No hidden fees, no surprises. We provide honest, transparent pricing before any work begins. Know exactly what you're paying before we start the job.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e85d04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <h3>Local Family Business</h3>
+      <p>Locally owned and operated in Gilbert. We treat every customer like a neighbor, because they are. Your satisfaction is our personal reputation on the line.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-img-wrap">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=800&fit=crop" alt="Ellsworth Team" class="about-img" loading="lazy">
+      <div class="about-badge">
+        <span class="about-badge-num">4.8</span>
+        <span class="about-badge-text">Star Rated Service</span>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="section-header">
+        <span class="section-tag">Our Story</span>
+        <h2>Gilbert's Trusted <span>HVAC Experts</span></h2>
+        <div class="divider"></div>
+      </div>
+      <p>Ellsworth Air Conditioning and Home Services has been serving the Gilbert community and surrounding East Valley neighborhoods for over 15 years. Founded on the principles of integrity, craftsmanship, and genuine customer care, we've grown from a small operation into one of the most trusted names in Arizona home comfort.</p>
+      <p>Our team of certified technicians undergoes continuous training to stay current with the latest HVAC technologies and energy-efficiency standards. Located right here at 700 N Neely St in Gilbert, we're your neighbors — and we take that responsibility seriously.</p>
+      <ul class="about-features">
+        <li>
+          <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e85d04" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          NATE Certified Technicians
+        </li>
+        <li>
+          <svg class="check-
