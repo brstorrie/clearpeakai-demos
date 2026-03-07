@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A/C Rangers Heating & Cooling | Gilbert, Arizona</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1a2f45;
+    --navy-light: #243b55;
+    --silver: #c0c8d0;
+    --silver-light: #e8ecf0;
+    --orange: #f47c20;
+    --orange-dark: #d4661a;
+    --white: #ffffff;
+    --text-light: #a8b4bf;
+    --text-muted: #6b7a87;
+    --card-bg: #111e2c;
+    --border: rgba(192,200,208,0.15);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Work Sans', sans-serif; background: var(--navy); color: var(--white); overflow-x: hidden; }
+  h1,h2,h3,h4,h5 { font-family: 'Oswald', sans-serif; }
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(13,27,42,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
+  .nav-logo { display: flex; align-items: center; gap: 12px; }
+  .nav-logo-icon {
+    width: 44px; height: 44px; background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .nav-logo-text span:first-child { font-family: 'Oswald', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--white); letter-spacing: 0.5px; }
+  .nav-logo-text span:last-child { font-size: 0.68rem; color: var(--orange); font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--silver); letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange); color: var(--white); padding: 10px 22px;
+    border-radius: 6px; font-family: 'Oswald', sans-serif; font-size: 1rem;
+    font-weight: 600; letter-spacing: 0.5px; transition: background 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--orange-dark); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 26px; height: 2px; background: var(--white); border-radius: 2px; transition: 0.3s; }
+  .mobile-menu {
+    display: none; position: fixed; top: 72px; left: 0; right: 0; z-index: 999;
+    background: var(--navy); border-bottom: 2px solid var(--orange);
+    padding: 24px 32px 32px;
+    flex-direction: column; gap: 4px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 1.1rem; color: var(--silver); padding: 12px 0; border-bottom: 1px solid var(--border); font-weight: 500; }
+  .mobile-menu a:last-child { border-bottom: none; margin-top: 8px; }
+  .mobile-menu-cta {
+    background: var(--orange); color: var(--white); text-align: center;
+    padding: 14px; border-radius: 6px; font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem; font-weight: 600; margin-top: 16px; display: block;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&h=1080&fit=crop');
+    background-size: cover; background-position: center;
+  }
+  .hero-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(105deg, rgba(13,27,42,0.95) 0%, rgba(13,27,42,0.8) 50%, rgba(13,27,42,0.5) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 1;
+    max-width: 1280px; margin: 0 auto; padding: 120px 40px 80px;
+    width: 100%;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(244,124,32,0.15); border: 1px solid rgba(244,124,32,0.4);
+    border-radius: 50px; padding: 7px 16px; margin-bottom: 28px;
+  }
+  .hero-badge span { font-size: 0.8rem; color: var(--orange); font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
+  .hero h1 {
+    font-size: clamp(2.8rem, 6vw, 5.2rem); font-weight: 700; line-height: 1.05;
+    text-transform: uppercase; letter-spacing: -0.5px; margin-bottom: 24px;
+    max-width: 720px;
+  }
+  .hero h1 .accent { color: var(--orange); display: block; }
+  .hero-sub {
+    font-size: clamp(1rem, 1.8vw, 1.2rem); color: var(--silver);
+    max-width: 520px; line-height: 1.7; margin-bottom: 44px; font-weight: 300;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 60px; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    color: var(--white); padding: 16px 32px; border-radius: 8px;
+    font-family: 'Oswald', sans-serif; font-size: 1.15rem; font-weight: 600;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(244,124,32,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(244,124,32,0.45); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--white); padding: 15px 30px;
+    border: 2px solid rgba(255,255,255,0.3); border-radius: 8px;
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--orange); background: rgba(244,124,32,0.1); }
+  .hero-stats { display: flex; flex-wrap: wrap; gap: 40px; }
+  .hero-stat { }
+  .hero-stat .num { font-family: 'Oswald', sans-serif; font-size: 2.4rem; font-weight: 700; color: var(--orange); line-height: 1; }
+  .hero-stat .lbl { font-size: 0.8rem; color: var(--silver); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; font-weight: 500; }
+  .hero-scroll {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0.5; animation: bounce 2s infinite;
+  }
+  .hero-scroll span { font-size: 0.7rem; color: var(--silver); text-transform: uppercase; letter-spacing: 2px; }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  /* TICKER */
+  .ticker { background: var(--orange); padding: 12px 0; overflow: hidden; }
+  .ticker-inner { display: flex; gap: 60px; animation: ticker 30s linear infinite; white-space: nowrap; }
+  .ticker-item { display: flex; align-items: center; gap: 10px; font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--white); flex-shrink: 0; }
+  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* SECTION COMMON */
+  section { padding: 100px 40px; }
+  .container { max-width: 1280px; margin: 0 auto; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-bottom: 16px;
+  }
+  .section-label span { font-size: 0.78rem; color: var(--orange); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+  .section-line { width: 32px; height: 2px; background: var(--orange); }
+  .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; text-transform: uppercase; line-height: 1.1; margin-bottom: 20px; }
+  .section-sub { font-size: 1.05rem; color: var(--silver); max-width: 560px; line-height: 1.7; font-weight: 300; }
+
+  /* SERVICES */
+  #services { background: var(--card-bg); }
+  .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; flex-wrap: wrap; gap: 24px; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .service-card {
+    position: relative; overflow: hidden; cursor: pointer;
+    background: var(--navy-mid);
+    transition: transform 0.3s;
+  }
+  .service-card:hover { z-index: 2; transform: scale(1.02); }
+  .service-card-img { width: 100%; height: 280px; object-fit: cover; transition: transform 0.5s; display: block; }
+  .service-card:hover .service-card-img { transform: scale(1.08); }
+  .service-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,27,42,0.97) 0%, rgba(13,27,42,0.4) 60%, transparent 100%);
+    transition: background 0.3s;
+  }
+  .service-card:hover .service-card-overlay {
+    background: linear-gradient(to top, rgba(13,27,42,0.99) 0%, rgba(13,27,42,0.7) 70%, rgba(244,124,32,0.15) 100%);
+  }
+  .service-card-content {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 28px;
+  }
+  .service-icon-wrap {
+    width: 48px; height: 48px; background: var(--orange); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+    transition: transform 0.3s;
+  }
+  .service-card:hover .service-icon-wrap { transform: scale(1.1); }
+  .service-card h3 { font-size: 1.3rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+  .service-card p { font-size: 0.88rem; color: var(--silver); line-height: 1.6; max-height: 0; overflow: hidden; transition: max-height 0.4s; }
+  .service-card:hover p { max-height: 80px; }
+  .service-card-arrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--orange); font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1px; margin-top: 12px; opacity: 0; transform: translateY(8px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .service-card:hover .service-card-arrow { opacity: 1; transform: translateY(0); }
+
+  /* WHY CHOOSE US */
+  #why { background: var(--navy); position: relative; overflow: hidden; }
+  #why::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,124,32,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .why-features { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .why-feature {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .why-feature:hover { border-color: rgba(244,124,32,0.4); transform: translateY(-4px); }
+  .why-feature-icon {
+    width: 52px; height: 52px; background: rgba(244,124,32,0.12); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+  }
+  .why-feature h4 { font-size: 1.05rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.3px; }
+  .why-feature p { font-size: 0.85rem; color: var(--text-light); line-height: 1.65; }
+  .why-visual { position: relative; }
+  .why-main-img { width: 100%; border-radius: 16px; object-fit: cover; height: 520px; }
+  .why-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--orange); border-radius: 12px; padding: 20px 24px;
+    text-align: center; box-shadow: 0 8px 32px rgba(244,124,32,0.4);
+  }
+  .why-badge .num { font-family: 'Oswald', sans-serif; font-size: 2.8rem; font-weight: 700; color: var(--white); line-height: 1; }
+  .why-badge .txt { font-size: 0.75rem; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; font-weight: 500; }
+
+  /* ABOUT */
+  #about { background: var(--card-bg); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-img-wrap { position: relative; }
+  .about-img { width: 100%; height: 500px; object-fit: cover; border-radius: 16px; }
+  .about-img-accent {
+    position: absolute; top: -12px; left: -12px;
+    width: 100%; height: 100%; border: 2px solid var(--orange);
+    border-radius: 16px; z-index: 0; pointer-events: none;
+  }
+  .about-img { position: relative; z-index: 1; }
+  .about-content { }
+  .about-content p { font-size: 1rem; color: var(--silver); line-height: 1.8; margin-bottom: 20px; font-weight: 300; }
+  .about-highlights { display: flex; flex-direction: column; gap: 16px; margin: 32px 0; }
+  .about-highlight { display: flex; align-items: center; gap: 14px; }
+  .about-highlight-dot { width: 10px; height: 10px; background: var(--orange); border-radius: 50%; flex-shrink: 0; }
+  .about-highlight span { font-size: 0.95rem; color: var(--silver); font-weight: 400; }
+  .about-highlight strong { color: var(--white); }
+
+  /* TESTIMONIALS */
+  #testimonials { background: var(--navy); position: relative; overflow: hidden; }
+  .testi-header { text-align: center; margin-bottom: 64px; }
+  .testi-header .section-label { justify-content: center; }
+  .rating-display { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 24px; }
+  .stars-row { display: flex; gap: 4px; }
+  .rating-num { font-family: 'Oswald', sans-serif; font-size: 2rem; font-weight: 700; color: var(--orange); }
+  .rating-meta { font-size: 0.85rem; color: var(--text-light); }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .testi-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 36px;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative;
+  }
+  .testi-card:hover { border-color: rgba(244,124,32,0.3); transform: translateY(-4px); }
+  .testi-quote {
+    position: absolute; top: 24px; right: 24px; opacity: 0.08;
+  }
+  .testi-stars { display: flex; gap: 4px; margin-bottom: 20px; }
+  .testi-card p { font-size: 0.95rem; color: var(--silver); line-height: 1.75; margin-bottom: 28px; font-style: italic; font-weight: 300; }
+  .testi-author { display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--border); padding-top: 20px; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1rem;
+    color: var(--white); flex-shrink: 0;
+  }
+  .testi-author-info strong { display: block; font-size: 0.95rem; font-weight: 600; }
+  .testi-author-info span { font-size: 0.8rem; color: var(--text-light); }
+
+  /* SERVICE AREA */
+  #area { background: var(--navy-mid); }
+  .area-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .area-cities { margin-top: 32px; }
+  .area-cities-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .area-city {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 16px;
+    font-size: 0.9rem; font-weight: 500;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .area-city:hover { border-color: rgba(244,124,32,0.4); background: rgba(244,124,32,0.05); }
+  .area-city-dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; flex-shrink: 0; }
+  .area-map-placeholder {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden; height: 440px;
+    position: relative; display: flex; align-items: center; justify-content: center;
+  }
+  .map-bg {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(192,200,208,0.04) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(192,200,208,0.04) 40px);
+  }
+  .map-center {
+    position: relative; z-index: 1; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+  }
+  .map-pin-anim {
+    width: 60px; height: 60px; background: var(--orange);
+    border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 rgba(244,124,32,0.4);
+    animation: pulse 2s infinite;
+  }
+  .map-pin-anim svg { transform: rotate(45deg); }
+  @keyframes pulse {
+    0%{box-shadow:0 0 0 0 rgba(244,124,32,0.4)}
+    70%{box-shadow:0 0 0 20px rgba(244,124,32,0)}
+    100%{box-shadow:0 0 0 0 rgba(244,124,32,0)}
+  }
+  .map-label { font-family: 'Oswald', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--white); }
+  .map-sub { font-size: 0.85rem; color: var(--text-light); }
+
+  /* CONTACT */
+  #contact { background: var(--navy); }
+  .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+  .contact-info { }
+  .contact-info p { font-size: 1rem; color: var(--silver); line-height: 1.8; margin-bottom: 40px; font-weight: 300; }
+  .contact-items { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+    transition: border-color 0.2s;
+  }
+  .contact-item:hover { border-color: rgba(244,124,32,0.3); }
+  .contact-item-icon {
+    width: 46px; height: 46px; background: rgba(244,124,32,0.12);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .contact-item-text strong { display: block; font-size: 0.78rem; color: var(--orange); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; font-weight: 600; }
+  .contact-item-text span { font-size: 0.95rem; color: var(--white); }
+  .contact-form-wrap {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 20px; padding: 44px;
+  }
+  .contact-form-wrap h3 { font-size: 1.6rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+  .contact-form-wrap p { font-size: 0.9rem; color: var(--silver); margin-bottom: 32px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; font-size: 0.8rem; color: var(--silver); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-weight: 500; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; background: var(--navy-mid); border: 1px solid var(--border);
+    border-radius: 8px; padding: 13px 16px; color: var(--white);
+    font-family: 'Work Sans', sans-serif; font-size: 0.95rem;
+    outline: none; transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--orange); }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-group select { cursor: pointer; }
+  .form-group select option { background: var(--navy-mid); }
+  .btn-submit {
+    width: 100%; background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    border: none; color: var(--white); padding: 16px;
+    font-family: 'Oswald', sans-serif; font-size: 1.15rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; border-radius: 8px;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(244,124,32,0.4); }
+
+  /* PHONE CTA STRIP */
+  .cta-strip {
+    background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+    padding: 60px 40px; text-align: center;
+  }
+  .cta-strip h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
+  .cta-strip p { font-size: 1.05rem; color: rgba(255,255,255,0.85); margin-bottom: 32px; }
+  .cta-strip-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+  .btn-white {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--white); color: var(--orange-dark);
+    padding: 15px 32px; border-radius: 8px;
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 700;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+  .btn-outline-white {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--white);
+    padding: 14px 30px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.6);
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+
+  /* FOOTER */
+  footer {
+    background: var(--card-bg); border-top: 1px solid var(--border);
+    padding: 64px 40px 32px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; max-width: 1280px; margin: 0 auto; }
+  .footer-about p { font-size: 0.9rem; color: var(--text-light); line-height: 1.75; margin-top: 16px; margin-bottom: 24px; }
+  .footer-social { display: flex; gap: 10px; }
+  .footer-social-btn {
+    width: 40px; height: 40px; background: var(--navy-mid); border: 1px solid var(--border);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .footer-social-btn:hover { border-color: var(--orange); background: rgba(244,124,32,0.1); }
+  .footer-col h4 { font-size: 0.85rem; color: var(--orange); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 20px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { font-size: 0.9rem; color: var(--text-light); transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--orange); }
+  .footer-bottom {
+    max-width: 1280px; margin: 48px auto 0;
+    padding-top: 24px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  .footer-bottom p { font-size: 0.82rem; color: var(--text-muted); }
+
+  /* FLOATING PHONE */
+  .float-phone {
+    position: fixed; bottom: 28px; right: 28px; z-index: 900;
+    background: var(--orange); color: var(--white);
+    width: 58px; height: 58px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 24px rgba(244,124,32,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: ring 4s infinite;
+  }
+  .float-phone:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(244,124,32,0.6); }
+  @keyframes ring {
+    0%,90%,100%{transform:rotate(0)}
+    92%{transform:rotate(-12deg)}
+    94%{transform:rotate(12deg)}
+    96%{transform:rotate(-8deg)}
+    98%{transform:rotate(8deg)}
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 900px) {
+    section { padding: 80px 24px; }
+    .why-grid, .about-grid, .contact-wrapper, .area-grid { grid-template-columns: 1fr; gap: 48px; }
+    .why-features { grid-template-columns: 1fr 1fr; }
+    .testi-grid { grid-template-columns: 1fr 1fr; }
+    .services-header { flex-direction: column; align-items: flex-start; }
+    nav { padding: 0 24px; }
+    .nav-links, .nav-cta-wrap { display: none; }
+    .hamburger { display: flex; }
+    footer { padding: 48px 24px 24px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .cta-strip { padding: 48px 24px; }
+    .contact-form-wrap { padding: 28px 24px; }
+  }
+  @media (max-width: 640px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .why-features { grid-template-columns: 1fr; }
+    .hero-content { padding: 100px 24px 60px; }
+    .hero-actions { flex-direction: column; align-items: flex-start; }
+    .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .area-cities-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+    .why-badge { position: static; margin-top: 20px; display: inline-block; }
+    .cta-strip-actions { flex-direction: column; align-items: center; }
+    .btn-white, .btn-outline-white { width: 100%; justify-content: center; max-width: 360px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- FLOATING PHONE -->
+<a href="tel:" class="float-phone" aria-label="Call Us">
+  <svg width="26" height="26" fill="none" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.5 11.5 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.5 11.5 0 00.57 3.6 1 1 0 01-.24 1.01l-2.21 2.18z" fill="#fff"/></svg>
+</a>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" fill="#fff"/><path d="M3 20h18v2H3z" fill="rgba(255,255,255,0.4)"/></svg>
+    </div>
+    <div class="nav-logo-text">
+      <span>A/C Rangers</span>
+      <span>Heating &amp; Cooling</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#area">Service Area</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:" class="nav-cta nav-cta-wrap">Call Now</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#why" onclick="closeMenu()">Why Choose Us</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#area" onclick="closeMenu()">Service Area</a>
+  <a href="#testimonials" onclick="closeMenu()">Testimonials</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="tel:" class="mobile-menu-cta">
+    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:8px"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.5 11.5 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.5 11.5 0 00.57 3.6 1 1 0 01-.24 1.01l-2.21 2.18z" fill="#fff"/></svg>
+    Call Us Now
+  </a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#f47c20"/></svg>
+      <span>4.9 Star Rated in Gilbert, Arizona</span>
+    </div>
+    <h1>Expert HVAC<span class="accent">Heating &amp; Cooling</span>Solutions</h1>
+    <p class="hero-sub">Gilbert and Mesa's most trusted heating &amp; cooling specialists. Fast response times, certified technicians, and guaranteed satisfaction on every job.</p>
+    <div class="hero-actions">
+      <a href="tel:" class="btn-primary">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.5 11.5 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.5 11.5 0 00.57 3.6 1 1 0 01-.24 1.01l-2.21 2.18z" fill="#fff"/></svg>
+        Call For Service
+      </a>
+      <a href="#services" class="btn-secondary">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        View Services
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">4.9</div><div class="lbl">Star Rating</div></div>
+      <div class="hero-stat"><div class="num">15+</div><div class="lbl">Years Experience</div></div>
+      <div class="hero-stat"><div class="num">24/7</div><div class="lbl">Emergency Service</div></div>
+      <div class="hero-stat"><div class="num">500+</div><div class="lbl">Happy Customers</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner" id="ticker">
+    <div class="ticker-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+      AC Repair &amp; Installation
+    </div>
+    <div class="ticker-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+      Heating System Service
+    </div>
+    <div class="ticker-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+      Emergency HVAC
+    </div>
+    <div class="ticker-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+      Preventive Maintenance
+    </div>
+    <div class="ticker-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+      Air Quality Solutions
+    </div>
+    <div class="ticker-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+      Gilbert &amp; Mesa AZ
+    </div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+      AC Repair &amp; Installation
+    </div>
+    <div class="ticker-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+      Heating System Service
+    </div>
+    <div class="ticker-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+      Emergency HVAC
+    </div>
+    <div class="ticker-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+      Preventive Maintenance
+    </div>
+    <div class="ticker-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+      Air Quality Solutions
+    </div>
+    <div class="ticker-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+      Gilbert &amp; Mesa AZ
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <div>
+        <div class="section-label"><div class="section-line"></div><span>What We Do</span></div>
+        <h2 class="section-title">Our HVAC Services</h2>
+        <p class="section-sub">Comprehensive heating and cooling solutions for residential and commercial properties throughout the Gilbert area.</p>
+      </div>
+      <a href="tel:" class="btn-primary" style="align-self:flex-end">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.5 11.5 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.5 11.5 0 00.57 3.6 1 1 0 01-.24 1.01l-2.21 2.18z" fill="#fff"/></svg>
+        Schedule Service
+      </a>
+    </div>
+    <div class="services-grid">
+      <!-- Card 1 -->
+      <div class="service-card">
+        <img class="service-card-img" src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="AC Repair">
+        <div class="service-card-overlay"></div>
+        <div class="service-card-content">
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>AC Repair</h3>
+          <p>Fast diagnostics and reliable repairs for all makes and models of air conditioning systems. We restore comfort quickly.</p>
+          <span class="service-card-arrow">Learn More <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#f47c20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="service-card">
+        <img class="service-card-img" src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=800&h=600&fit=crop" alt="AC Installation">
+        <div class="service-card-overlay"></div>
+        <div class="service-card-content">
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#fff" stroke-width="2"/><path d="M9 12h6M12 9v6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>AC Installation</h3>
+          <p>Professional installation of new AC systems with expert sizing recommendations for maximum efficiency and savings.</p>
+          <span class="service-card-arrow">Learn More <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#f47c20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="service-card">
+        <img class="service-card-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" alt="Heating Service">
+        <div class="service-card-overlay"></div>
+        <div class="service-card-content">
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 4-4 6-4 9H9c0-3-4-5-4-9a7 7 0 017-7z" stroke="#fff" stroke-width="2"/><path d="M9 21h6M10 18h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Heating Systems</h3>
+          <p>Complete furnace and heat pump repair, installation, and maintenance to keep you warm through Arizona's cooler months.</p>
+          <span class="service-card-arrow">Learn More <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#f47c20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="service-card">
+        <img class="service-card-img" src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&h=800&fit=crop" alt="Maintenance">
+        <div class="service-card-overlay"></div>
+        <div class="service-card-content">
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Preventive Maintenance</h3>
+          <p>Scheduled tune-ups and inspections to extend equipment lifespan, improve efficiency, and prevent costly breakdowns.</p>
+          <span class="service-card-arrow">Learn More <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#f47c20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="service-card">
+        <img class="service-card-img" src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&h=600&fit=crop" alt="Emergency Service">
+        <div class="service-card-overlay"></div>
+        <div class="service-card-content">
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="#fff" stroke-width="2"/><line x1="12" y1="9" x2="12" y2="13" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Emergency Service</h3>
+          <p>24/7 emergency HVAC service for when you need it most. Same-day response to restore your comfort fast.</p>
+          <span class="service-card-arrow">Learn More <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#f47c20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div class="service-card">
+        <img class="service-card-img" src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=800&h=600&fit=crop" alt="Air Quality">
+        <div class="service-card-overlay"></div>
+        <div class="service-card-content">
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-li
